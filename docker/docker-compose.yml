@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: "qvagas_db"
+    image: "mariadb:10.4"
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_ROOT_PASSWORD: senha123
+  redis:
+    container_name: "redis"
+    image: "redis"
+    command: redis-server --requirepass PASSWORD
+    ports:
+      - "6379:6379"

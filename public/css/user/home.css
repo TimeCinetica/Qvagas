@@ -1,0 +1,90 @@
+#home-page .welcome {
+    margin-top: 2rem;
+}
+
+#home-page #my-resume {
+    margin-top: 3rem;
+}
+
+#home-page #my-resume h4 {
+    opacity: 0.7;
+}
+
+#home-page .welcome .card .card-title {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+#home-page #card-options {
+    margin-top: 3rem;
+}
+
+#home-page #card-options .card {
+    padding-left: 0rem;
+    padding-right: 0rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+}
+
+#home-page #card-options .card:hover {
+    background-color: var(--primary-hover);
+    outline: 1px solid var(--primary);
+}
+
+#home-page .option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#home-page .option i {
+    color: var(--primary);
+    font-size: 5rem;
+}
+
+#home-page .option label {
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    color: black;
+}
+
+#home-page #card-options a {
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 800px) {
+    #home-page .card {
+        width: 95%;
+        padding: 0.75rem;
+    }
+
+    #home-page #my-resume .info-label {
+        justify-content: space-between;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    #home-page #card-options {
+        margin-top: 2rem;
+    }
+
+    #home-page a.small-button {
+        height: 2rem;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    #home-page #card-options {
+        margin-top: 1rem;
+    }
+
+    #home-page #card-options .card {
+        margin-bottom: 1rem;
+    }
+}

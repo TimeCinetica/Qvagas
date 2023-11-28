@@ -1,0 +1,13 @@
+#list-admins-page .header {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5rem;
+}
+
+#list-admins-page .header h2 {
+    margin-right: 2rem;
+}
+
+#list-admins-page #list-admins-table .cpf-col {
+    width: 10rem;
+}

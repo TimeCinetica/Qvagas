@@ -1,0 +1,42 @@
+nav {
+    background-color: var(--primary);
+}
+
+nav .nav-item {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+nav .nav-item.logout-position {
+    cursor: pointer;
+    margin-left: 5rem;
+    padding-right: 0;
+}
+
+nav .nav-item.logout-position a {
+    border: 1px solid #ffffff8c;
+    border-radius: 4px;
+}
+
+nav .nav-item.logout-position a:hover {
+    border-color: hsla(0,0%,100%,.75);
+}
+
+nav .nav-item a.nav-link {
+    cursor: pointer;
+}
+
+nav .nav-item a.nav-link i {
+    margin-right: 0.25rem;
+}
+
+nav .navbar-brand img {
+    height: 2.2rem;
+    padding-left: 0;
+}
+
+@media only screen and (max-width: 990px) {
+    nav .nav-item.logout-position {
+        margin-left: 0;
+    }
+}

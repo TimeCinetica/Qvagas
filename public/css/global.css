@@ -1,0 +1,89 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-Regular.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "RobotoBold";
+    src: url("../fonts/Roboto/Roboto-Bold.ttf");
+    font-weight: bold;
+}
+
+:root {
+    --primary: #2698d4;
+    --primary-hover: #f2fbff;
+    --body-bg: #f8f8f8;
+    --card-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    
+    --danger: #dc3545;
+    --warning: #ffc107;
+    --success: #198754;
+}
+
+.text-danger-qvagas {
+    color: var(--danger) !important;
+}
+
+.bg-danger-qvagas {
+    background-color: var(--danger) !important;
+}
+
+.text-success-qvagas {
+    color: var(--success) !important;
+}
+
+.bg-success-qvagas {
+    background-color: var(--success) !important;
+}
+
+.bg-primary-qvagas {
+    background-color: var(--primary) !important;
+}
+
+.select2 {
+    width: 100%;
+}
+
+.text-white-qvagas {
+    color: white !important;
+}
+
+.card-shadow {
+    box-shadow: var(--card-shadow);
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 3rem;
+}
+
+html,
+body {
+    width: 100% !important;
+    height: 100% !important;
+    font-family: "Roboto" !important;
+    font-size: 16px !important;
+    background-color: var(--body-bg) !important;
+}
+
+h1 {
+    font-family: "RobotoBold";
+    color: var(--primary);
+}
+
+.btn-dft {
+    width: 8rem;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px !important;
+}
+
+.btn-dft i {
+    margin-left: 0.5rem;
+}

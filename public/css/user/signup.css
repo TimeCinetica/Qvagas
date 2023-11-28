@@ -1,0 +1,70 @@
+#signup-page {
+    background-color: var(--body-bg);
+    height: 100% !important;
+}
+
+#signup-page h1 {
+    margin-top: 1.5rem;
+}
+
+#signup-page .important-row {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#signup-page .accordion-button {
+    font-size: 20px;
+}
+
+#signup-page .accordion-button i {
+    margin-left: 0.5rem;
+    font-size: 25px;
+}
+
+#signup-page .accordion-button i.text-warning {
+    color: #f4d461 !important;
+}
+
+#signup-page .terms-input {
+    margin-top: 2rem;
+}
+
+#signup-page .next-button {
+    margin-top: 2rem;
+    width: 10rem;
+}
+
+#signup-page u {
+    color: var(--primary);
+}
+
+#signup-page hr {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+#signup-page #btn-submit {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 20rem;
+    height: 3rem;
+    font-size: 1.2rem;
+}
+
+#signup-page form .btn-outline-danger {
+    margin-top: 1.5rem;
+    outline: 1px solid var(--danger);
+    color: var(--danger);
+}
+
+#signup-page form .btn-outline-danger:hover {
+    color: white;
+}
+
+#signup-page #signup-button {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    height: 3rem;
+    font-size: 18px;
+    width: 20rem;
+}

@@ -1,0 +1,43 @@
+.card.enumerable {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.card.enumerable .card-header {
+    border-bottom: none;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 14px;
+    background-color: transparent;
+}
+
+.card.enumerable .card-body {
+    font-size: 32px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.card.enumerable.redirect {
+    cursor: pointer;
+}
+
+.card.enumerable.redirect:hover {
+    background-color: var(--primary-hover);
+    outline: 1px solid var(--primary);
+}
+
+.card.enumerable.green {
+    border-left: 8px solid #36CE69;
+}
+
+.card.enumerable.blue {
+    border-left: 8px solid #2698D4;
+}
+
+.card.enumerable.yellow {
+    border-left: 8px solid #ECE420;
+}
+
+.card.enumerable.red {
+    border-left: 8px solid #CE3636;
+}

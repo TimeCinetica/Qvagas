@@ -1,0 +1,29 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// Override Bootstrap
+@import "override";
+
+// Boostrap Icons
+@import "~bootstrap-icons/font/bootstrap-icons";
+
+// SweetAlert2
+@import "~sweetAlert2/dist/sweetalert2.min.css";
+
+// Datepicker
+@import "~bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css";
+
+// Select2
+@import "~select2/dist/css/select2.min.css";
+
+// MicroModal
+@import "micromodal";
+
+// Pagination
+@import "pagination";

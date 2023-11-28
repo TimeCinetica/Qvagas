@@ -1,0 +1,15 @@
+#delete-page h1 {
+    margin-top: 1.5rem;
+}
+
+#delete-page #delete-button {
+    margin-top: 3rem;
+    width: 10rem;
+}
+
+@media only screen and (max-width: 800px) {
+    #delete-page .card {
+        width: 95%;
+        padding: 0.75rem;
+    }
+}

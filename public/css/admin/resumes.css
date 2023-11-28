@@ -1,0 +1,35 @@
+#resumes-page h2 {
+    font-weight: bold;
+}
+
+#resumes-page .header {
+    display: flex;
+    flex-direction: row;
+    padding-top: 3rem;
+}
+
+#resumes-page .header h2 {
+    margin-right: 2rem;
+}
+
+#resumes-page .header button:hover {
+    color: white !important;
+}
+
+#resumes-page .select-filter {
+    width: 20rem;
+    margin-right: 1rem;
+}
+
+#resumes-page .select-filter .select2-container--default .select2-selection--multiple {
+    background-color: #F8FAFC;
+    border-color: #ced4da;
+    min-height: 2.3rem;
+}
+
+#resumes-page .select-filter .select2-container--default .select2-selection--multiple .select2-search__field {
+    margin-top: 9px;
+    margin-left: 10px;
+    font-size: 14px;
+    font-family: 'Roboto';
+}

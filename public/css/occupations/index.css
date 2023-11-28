@@ -1,0 +1,13 @@
+#occupations-page h2 {
+    font-weight: bold;
+}
+
+#occupations-page .header {
+    display: flex;
+    flex-direction: row;
+    padding-top: 3rem;
+}
+
+#occupations-page .header h2 {
+    margin-right: 2rem;
+}

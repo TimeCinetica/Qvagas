@@ -1,0 +1,33 @@
+#performance .info-label {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#performance .info-label label {
+    color: var(--primary);
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+#performance .info-label i {
+    color: var(--primary);
+    cursor: pointer;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+}
+
+#performance a.small-button {
+    font-size: 11px;
+    padding: 0.3rem;
+    height: 1.3rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#performance select {
+    width: 12rem;
+}

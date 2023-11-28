@@ -1,0 +1,131 @@
+#details-page {
+    background-color: var(--body-bg);
+    height: 100% !important;
+}
+
+#details-page #page-header {
+    margin-bottom: 0.5rem;
+}
+
+#details-page #performance {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#details-page h1 {
+    margin-top: 1.5rem;
+}
+
+#details-page .accordion-button {
+    font-size: 20px;
+}
+
+#details-page .accordion-button i {
+    margin-left: 0.5rem;
+    font-size: 25px;
+}
+
+#details-page .accordion-button i.text-warning {
+    color: #f4d461 !important;
+}
+
+#details-page .terms-input {
+    margin-top: 2rem;
+}
+
+#details-page .next-button {
+    margin-top: 2rem;
+    width: 10rem;
+}
+
+#details-page u {
+    color: var(--primary);
+}
+
+#details-page hr {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+#details-page #btn-submit {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 20rem;
+    height: 3rem;
+    font-size: 1.2rem;
+}
+
+#details-page form .btn-outline-danger {
+    margin-top: 1.5rem;
+    outline: 1px solid var(--danger);
+    color: var(--danger);
+}
+
+#details-page form .btn-outline-danger:hover {
+    color: white;
+}
+
+#details-page .end-button {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    height: 3rem;
+    font-size: 18px;
+    width: 20rem;
+}
+
+#details-page #save-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#details-page #edit-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+#details-page #revert-button {
+    border-color: var(--danger);
+    color: var(--danger);
+    background-color: transparent;
+}
+
+#details-page #revert-button:hover {
+    background-color: var(--danger);
+    color: white;
+}
+
+#details-page .view-file {
+    display: flex;
+    cursor: pointer;
+    color: var(--primary);
+    align-items: center;
+    width: auto;
+    text-decoration: none;
+}
+
+#details-page .view-file:hover {
+    text-decoration: underline;
+}
+
+#details-page .view-file i {
+    font-size: 24px;
+    margin-right: 1rem;
+}
+
+#details-page #add-expirence-button,
+#details-page #add-language-button {
+    display: flex;
+    justify-content: center;
+}
+
+#details-page .top-buttons {
+    width: 11rem;
+}
+
+#details-page .top-buttons:hover {
+    color: white
+}
+
+#details-page .top-buttons i {
+    margin-left: 0.2rem;
+}
