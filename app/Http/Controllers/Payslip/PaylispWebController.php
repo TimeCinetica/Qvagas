@@ -10,6 +10,9 @@ class PaylispWebController extends Controller
 {
     public function contraCheque(){
 
-        return view('welcome');
+    $this->authorize('usuario', Funcionario::class);
+
+    
+
     }
 }
