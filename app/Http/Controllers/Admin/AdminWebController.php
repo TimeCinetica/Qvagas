@@ -107,6 +107,6 @@ class AdminWebController extends Controller
         ];
     }
     public function teste(){
-        
+        ;
     }
 }
