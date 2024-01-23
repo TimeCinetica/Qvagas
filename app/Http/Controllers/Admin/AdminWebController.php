@@ -106,4 +106,7 @@ class AdminWebController extends Controller
             'delete'  => true,
         ];
     }
+    public function teste(){
+        
+    }
 }
