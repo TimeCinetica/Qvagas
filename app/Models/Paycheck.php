@@ -10,8 +10,6 @@ class Paycheck extends Model
    $paycheck = new Paycheck();
    
    $paychecks = $payhceck->join('users', 'paychecks.user_id', '=', 'users.id');
-
-   // Exibe os resultados do join
    foreach ($paychecks as $paycheck) {
     echo $paycheck->user->name; 
    }
