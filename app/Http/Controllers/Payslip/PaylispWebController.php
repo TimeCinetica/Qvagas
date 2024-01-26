@@ -1,18 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Payslip;
 
-use App\Services\AuthService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class PaylispWebController extends Controller
 {
-    public function index(){    
-        if (! $this->user->can('AcessPaycheck')){
-
-        } else {
-        
-        }
+    public function index()
+    {
+        return 'ok';
     }
 }

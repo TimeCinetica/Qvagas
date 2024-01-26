@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\paylisp\PaylispWebController;
+use App\Http\Controllers\Payslip\PaylispWebController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/contracheque', ['middleware' => 'HasPaycheckAcess']);
+
+    Route::get('contracheque', [PaylispWebController::class, 'index']);
+
