@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class PaylispWebController extends Controller
 {
-    public function contraCheque(){
+    public function index(){    
+        if (! $this->user->can('AcessPaycheck')){
 
-    $this->authorize('usuario', Funcionario::class);
-
-    
-
+        } else {
+        
+        }
     }
 }
