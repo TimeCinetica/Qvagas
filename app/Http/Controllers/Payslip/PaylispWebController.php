@@ -10,11 +10,8 @@ class PaylispWebController extends Controller
 {
     public function index()
     {
-        $users = DB::table('users')->get();
-         
-        foreach ($users as $user) {
-            echo $user->name;
-        }
+        $paychecks = DB::table('paychecks')
+        ->join('users', 'paychecking.user_id', '=', 'users.id');
        
         return view('paycheck.teste');
     }
