@@ -16,7 +16,7 @@ class DropPaycheckWrongCollumns extends Migration
         Schema::table('paycheck', function (Blueprint $table) {
             //columns
 
-           $table->string('name');
+           $table->string('nameUser');
            $table->unsignedBigInteger('user_id');
            $table->string('paycheck');
 
