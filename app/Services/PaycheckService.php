@@ -15,5 +15,9 @@ class PaycheckService
         $this->paychecks = $paychecks;
     }
 
-
+    public function getByUserId($userId)
+    {
+        $user = $this->users->findOrFail($userId);
+        return $user->paychecks;
+    }
 }
