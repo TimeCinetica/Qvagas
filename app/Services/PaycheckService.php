@@ -14,7 +14,6 @@ class PaycheckService
         $this->users = $users;
         $this->paychecks = $paychecks;
 
-
     }
 
     public function getByUserId($userId)
@@ -23,5 +22,5 @@ class PaycheckService
         return $user->paychecks;
     }
 
-    
+
 }

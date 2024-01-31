@@ -3,6 +3,6 @@
 use App\Http\Controllers\Payslip\PaylispWebController;
 use Illuminate\Support\Facades\Route;
 
-
-    Route::get('contracheque', [PaylispWebController::class, 'index']);
-
+Route::middleware(['throttle:300,1'])->group(function () {
+    Route::get('/contracheque', [PaylispWebController::class, 'show']);
+    });
