@@ -25,8 +25,8 @@ class PaylispWebController extends Controller
     public function renderPaycheck(Request $request){
 
         $paycheckArmazem = $this->PaycheckService->index($request);
-        return view('teste.blade', [
-            'paycheckArmazem' -> $paycheckArmazem,
+        return view('paycheck.teste', [
+            'paycheckArmazem' => $paycheckArmazem,
         ]);
     }
 

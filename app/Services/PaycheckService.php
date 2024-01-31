@@ -17,16 +17,9 @@ class PaycheckService
 
     public function index($request = null, $returnAll = false)
     {
-        $paycheck = [];
-
-        if (isset($request) && !$returnAll) {
-            $query = $this->userQueryFilter($request);
-            $paycheck = $query->paginate(10);
-        } else {
-            $paycheck = $this->paycheck->all();
-        }
-
-        return $paycheck;
+        $results = User::where('id', $request->user()->id)->get();
+        
+        return $results;
     }
     private function userQueryFilter($request)
     {
