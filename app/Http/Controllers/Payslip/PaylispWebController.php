@@ -1,4 +1,5 @@
 <?php
+//CONTROLLER DO PAYCHECK OU FOLHA DE PAGAMENTO
 
 namespace App\Http\Controllers\Payslip;
 

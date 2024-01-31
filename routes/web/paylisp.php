@@ -1,5 +1,7 @@
 <?php
 
+//ARQUIVO DO PAYCHECK
+
 use App\Http\Controllers\Payslip\PaylispWebController;
 use Illuminate\Support\Facades\Route;
 
