@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaycheckTable extends Migration
+class AlterPaycheckTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,9 @@ class CreatePaycheckTable extends Migration
     public function up()
     {
         Schema::create('paycheck', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            //Não faz sentido guardar 3 chaves iguais//
+            $table->foreignId('sAdmin')->nullable()->constrained('users');
+            $table->foreignId('colaborador')->nullable()->constrained('users');
         });
     }
 
@@ -26,6 +27,6 @@ class CreatePaycheckTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paycheck');
+        //
     }
 }
