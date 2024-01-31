@@ -13,10 +13,8 @@ class AlterPaycheckTable extends Migration
      */
     public function up()
     {
-        Schema::create('paycheck', function (Blueprint $table) {
-            //Não faz sentido guardar 3 chaves iguais//
-            $table->foreignId('sAdmin')->nullable()->constrained('users');
-            $table->foreignId('colaborador')->nullable()->constrained('users');
+        Schema::table('paycheck', function (Blueprint $table) {
+          $table->string('nomeAdmin');
         });
     }
 

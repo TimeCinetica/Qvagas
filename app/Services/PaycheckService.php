@@ -9,15 +9,38 @@ use Illuminate\Support\Facades\DB;
 class PaycheckService
 {
     protected $users;
-    protected $paychecks;
-    public function __construct(User $users, Paycheck $paychecks){
+    protected $paycheck;
+    public function __construct(User $users, Paycheck $paycheck){
         $this->users = $users;
-        $this->paychecks = $paychecks;
+        $this->paycheck = $paycheck;
     }
 
-    public function getByUserId($userId)
+    public function index($request = null, $returnAll = false)
     {
-        $user = $this->users->findOrFail($userId);
-        return $user->paychecks;
+        $paycheck = [];
+
+        if (isset($request) && !$returnAll) {
+            $query = $this->userQueryFilter($request);
+            $paycheck = $query->paginate(10);
+        } else {
+            $paycheck = $this->paycheck->all();
+        }
+
+        return $paycheck;
+    }
+    private function userQueryFilter($request)
+    {
+        $query = $this->paycheck->query();
+
+        if (isset($request->name)) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+
+        if (isset($request->orderby)) {
+            $orderParams = explode("-", $request->orderby);
+            $query->orderBy($orderParams[0], $orderParams[1]);
+        }
+
+        return $query;
     }
 }
