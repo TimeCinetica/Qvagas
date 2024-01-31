@@ -6,7 +6,7 @@ use Closure;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
-class HasPaycheckAcess
+class HasPaycheckAccess
 {
      protected $authService;
 

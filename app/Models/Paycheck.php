@@ -11,8 +11,8 @@ class Paycheck extends Model
 
     public function paycheckJoin()
     {
-        $paychecks = DB::table('paychecks')
-        ->join('users', 'paychecking.user_id', '=', 'users.id');
+        $paycheck = DB::table('paycheck')
+        ->join('users', 'paycheck.user_id', '=', 'users.id');
     }
 
 }

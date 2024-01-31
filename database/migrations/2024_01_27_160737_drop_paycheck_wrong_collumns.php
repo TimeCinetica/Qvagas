@@ -18,11 +18,11 @@ class DropPaycheckWrongCollumns extends Migration
 
            $table->string('nameUser');
            $table->unsignedBigInteger('user_id');
-           $table->string('paychecking');
+           $table->string('paycheckpdf');
 
            //constraint
            $table->foreign('user_id')->references('id')->on('users');
-           
+
 
         });
     }
