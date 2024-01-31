@@ -9,10 +9,13 @@ class Paycheck extends Model
 {
    use HasFactory;
 
+   protected $table = 'paycheck';
+
     public function paycheckJoin()
     {
         $paycheck = DB::table('paycheck')
-        ->join('users', 'paycheck.user_id', '=', 'users.id');
+        ->join('users', 'paycheck.user_id', '=', 'users.id')
+        ->get();
     }
 
 }

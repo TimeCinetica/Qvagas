@@ -1,4 +1,5 @@
 <?php
+//CONTROLLER DO PAYCHECK OU FOLHA DE PAGAMENTO
 
 namespace App\Http\Controllers\Payslip;
 
@@ -13,7 +14,8 @@ class PaylispWebController extends Controller
 {
     protected $PaycheckService;
     protected $userService;
-    public function __construct( PaycheckService $PaycheckService ) {
+    public function __construct( UserService $userService, PaycheckService $PaycheckService ) {
+        $this->userService = $userService;
         $this->PaycheckService = $PaycheckService;
     }
     public function index(Request $request)
@@ -21,12 +23,29 @@ class PaylispWebController extends Controller
         $paycheckArmazem = $this->PaycheckService->index($request);
         return response()->json($paycheckArmazem, 200);
     }
-    public function renderPaycheck(Request $request){
+    public function renderPaycheck(Request $request, $userId){
 
+        $user = $this->userService->getById($userId);
         $paycheckArmazem = $this->PaycheckService->index($request);
-        return view('teste.blade', [
-            'paycheckArmazem' -> $paycheckArmazem,
+        return view('paycheck.teste', [
+            'paycheckArmazem' => $paycheckArmazem,
         ]);
+    }
+
+    public function renderPaychecks(Request $request){
+        $policies = $this->getPaycheckPolicies();
+        $paychecks = $this->PaycheckService->index($request);
+        return view('admin.paycheck', ['paycheck' => $paychecks, 'policies' => $policies]);
+    }
+
+    private function getPaycheckPolicies()
+    {
+        $isSadmin = auth()->user()->isSadmin();
+        return (object) [
+            'details' => true,
+            'edit'    => false,
+            'delete'  => $isSadmin
+        ];
     }
 
 
