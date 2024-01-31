@@ -12,11 +12,8 @@ class PaylispWebController extends Controller
 {
 
     public function __construct(
-        UserService $userService,
-        AuthService $authService
     ) {
-        $this->userService = $userService;
-        $this->authService = $authService;
+
     }
 
     protected $userService;
@@ -24,13 +21,5 @@ class PaylispWebController extends Controller
     {
         return view('paycheck.teste');
     }
-    public function show(){
-        $user = $this->auth->user();
 
-        if ($user->hasRole('admin')) {
-            return view('admin.home', compact('user'));
-        } else {
-            return view('paycheck.teste', compact('user'));
-        };
-    }
 }

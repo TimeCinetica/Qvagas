@@ -51,11 +51,12 @@ class AuthService
         return isset($user) && ($user->isAdmin() || $user->id == $userId);
     }
 
-    public function hasPaycheckAcess($userId){
-
+    public function hasPaycheckAccess($userId)
+    {
         $user = $this->authenticatedUser();
         return isset($user) && ($user->isAdmin() || $user->id == $userId);
     }
+
 
     /**
      * Check if admin has password setted

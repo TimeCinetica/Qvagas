@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Services\AuthService;
 use Closure;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
-
+use Illuminate\Contracts\Auth\Factory as AuthFactory;
 class HasPaycheckAcess
 {
      protected $authService;
@@ -29,7 +29,7 @@ class HasPaycheckAcess
 
 
     public function handle(Request $request, Closure $next){
-        $authorized = $this->authService->hasPaycheckAcess($request->route('userId'));
+        $authorized = $this->authService->hasPaycheckAccess($request->route('userId'));
         if (!$authorized) {
         return redirect('');
     }

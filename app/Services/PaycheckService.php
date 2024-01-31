@@ -13,13 +13,6 @@ class PaycheckService
     public function __construct(User $users, Paycheck $paychecks){
         $this->users = $users;
         $this->paychecks = $paychecks;
-
-    }
-
-    public function getByUserId($userId)
-    {
-        $user = $this->users->findOrFail($userId);
-        return $user->paychecks;
     }
 
 
