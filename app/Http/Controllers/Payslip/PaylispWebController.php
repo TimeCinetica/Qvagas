@@ -8,6 +8,7 @@ use App\Services\PaycheckService;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Services\AuthService;
+use App\Models\User;
 
 class PaylispWebController extends Controller
 {
@@ -19,13 +20,28 @@ class PaylispWebController extends Controller
     public function index(Request $request)
     {
         $paycheckArmazem = $this->PaycheckService->index($request);
+       
         return response()->json($paycheckArmazem, 200);
     }
     public function renderPaycheck(Request $request){
 
         $paycheckArmazem = $this->PaycheckService->index($request);
-        return view('teste.blade', [
-            'paycheckArmazem' -> $paycheckArmazem,
+        $admin_responsed = $paycheckArmazem[0]->name;
+        $users = User::where('admin_responsed', $admin_responsed)->get();
+
+
+        return view('paycheck.details', [
+            'paycheckArmazem' => $paycheckArmazem,
+            'users' => $users,
+        ]);
+    }
+
+    public function renderNewPaycheck(Request $request){
+
+        $paycheckArmazem = $this->PaycheckService->index($request);
+
+        return view('paycheck.newUser', [
+            'paycheckArmazem' => $paycheckArmazem,
         ]);
     }
 

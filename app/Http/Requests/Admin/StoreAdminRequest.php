@@ -24,11 +24,12 @@ class StoreAdminRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'          => ['required'],
-            'cpf'           => ['required', 'unique:users'],
-            'email'         => ['required', 'email', 'unique:users'],
-            'roleId'        => ['required', 'in:1,2'],
-            'password'      => ['required', 'min:6'],
+            'name'                  => ['required'],
+            'admin_responsed'       => [],
+            'cpf'                   => ['required', 'unique:users'],
+            'email'                 => ['required', 'email', 'unique:users'],
+            'roleId'                => ['required', 'in:1,2,4'],
+            'password'              => ['required', 'min:6'],
         ];
     }
 }

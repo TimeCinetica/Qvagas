@@ -9,6 +9,8 @@ class Paycheck extends Model
 {
    use HasFactory;
 
+   protected $table = 'paycheck';
+
     public function paycheckJoin()
     {
         $paycheck = DB::table('paycheck')

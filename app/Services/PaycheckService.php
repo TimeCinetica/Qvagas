@@ -17,16 +17,11 @@ class PaycheckService
 
     public function index($request = null, $returnAll = false)
     {
-        $paycheck = [];
+        // Realize a consulta ao banco de dados
+        $results = User::where('id', $request->user()->id)->get();
 
-        if (isset($request) && !$returnAll) {
-            $query = $this->userQueryFilter($request);
-            $paycheck = $query->paginate(10);
-        } else {
-            $paycheck = $this->paycheck->all();
-        }
-
-        return $paycheck;
+        // Retorne os resultados
+        return $results;
     }
     private function userQueryFilter($request)
     {

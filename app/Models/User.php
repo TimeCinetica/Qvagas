@@ -58,7 +58,8 @@ class User extends Authenticatable implements JWTSubject
         'pcdReport',
         'evaluated', // Avaliado pela equipe QVagas
         'stamped', // Selo de Talentos do LabCarreiras,
-        'passwordResetedAt'
+        'passwordResetedAt',
+        'admin_responsed'
     ];
 
     /**
