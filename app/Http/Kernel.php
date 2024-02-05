@@ -71,7 +71,8 @@ class Kernel extends HttpKernel
         'isWebAdmin' => \App\Http\Middleware\isWebAdmin::class,
         'isWebSadmin' => \App\Http\Middleware\isWebSadmin::class,
         'isAnyUser' => \App\Http\Middleware\IsAnyUser::class,
-        'hasResumeAccess' => \App\Http\Middleware\HasResumeAccess::class
+        'hasResumeAccess' => \App\Http\Middleware\HasResumeAccess::class,
+        'hasPaycheckAccess' => \App\Http\Middleware\HasPaycheckAccess::class
     ];
 
     /**

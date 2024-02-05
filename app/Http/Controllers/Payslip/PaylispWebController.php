@@ -1,18 +1,49 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Payslip;
 
-use App\Services\AuthService;
+use App\Http\middleware\HasPaycheckAccess;
 use App\Http\Controllers\Controller;
+use App\Services\PaycheckService;
 use Illuminate\Http\Request;
+use App\Services\UserService;
+use App\Services\AuthService;
+use App\Models\User;
 
 class PaylispWebController extends Controller
 {
-    public function contraCheque(){
-
-    $this->authorize('usuario', Funcionario::class);
-
-    
-
+    protected $PaycheckService;
+    protected $userService;
+    public function __construct( PaycheckService $PaycheckService ) {
+        $this->PaycheckService = $PaycheckService;
     }
+    public function index(Request $request)
+    {
+        $paycheckArmazem = $this->PaycheckService->index($request);
+       
+        return response()->json($paycheckArmazem, 200);
+    }
+    public function renderPaycheck(Request $request){
+
+        $paycheckArmazem = $this->PaycheckService->index($request);
+        $admin_responsed = $paycheckArmazem[0]->name;
+        $users = User::where('admin_responsed', $admin_responsed)->get();
+
+
+        return view('paycheck.details', [
+            'paycheckArmazem' => $paycheckArmazem,
+            'users' => $users,
+        ]);
+    }
+
+    public function renderNewPaycheck(Request $request){
+
+        $paycheckArmazem = $this->PaycheckService->index($request);
+
+        return view('paycheck.newUser', [
+            'paycheckArmazem' => $paycheckArmazem,
+        ]);
+    }
+
+
 }

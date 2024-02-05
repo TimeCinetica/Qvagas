@@ -52,6 +52,7 @@ class AdminService
      */
     public function newAdmin($request)
     {
+        //dd($request->admin_responsed);
         $cpf = preg_replace('/[^0-9]/', '', $request->cpf);
         $this->utilsService->validateCpf($cpf);
 
@@ -74,13 +75,15 @@ class AdminService
             'civil'         => 0,
             'volunteerWork' => 1,
             'hasChildren'   => 0,
-            'availableTravel' => 1
+            'availableTravel' => 1,
+            'admin_responsed' => $request->admin_responsed,
         ]);
 
         $admin = null;
         DB::transaction(function () use ($request, &$admin) {
             $admin = $this->user->create($request->all());
-            $this->notificationService->sendResetPassordEmail($admin);
+            //aqui está a linha para descomentar futuramente (aqui manda a mensagem de email)
+            //$this->notificationService->sendResetPassordEmail($admin);
         });
 
         return $admin;

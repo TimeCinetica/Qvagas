@@ -33,7 +33,7 @@ class ResumeService
 
     /**
      * Retorna a quantidade de curriculos que nao foram atualizados ha 6 meses
-     * 
+     *
      * @return int $count
      */
     public function countDeprecatedResumes()
@@ -50,7 +50,7 @@ class ResumeService
 
     /**
      * Retorna a quantidade total de curriculos
-     * 
+     *
      * @return int $count
      */
     public function countTotal()
@@ -60,7 +60,7 @@ class ResumeService
 
     /**
      * Retorna a quantidade de usarios com selos de talentos
-     * 
+     *
      * @return int $count
      */
     public function countStamped()
@@ -74,7 +74,7 @@ class ResumeService
 
     /**
      * Retorna a quantidade de usuarios avaliados
-     * 
+     *
      * @return int $count
      */
     public function countEvaluated()
@@ -87,7 +87,7 @@ class ResumeService
     }
 
     /**
-     * 
+     *
      */
     public function indexResumes(Request $request)
     {
@@ -101,7 +101,7 @@ class ResumeService
 
     /**
      * Retorna a quantidade de curriculos por status
-     * 
+     *
      * @return object $data
      */
     public function resumeByStatus()
@@ -111,7 +111,7 @@ class ResumeService
     }
 
     /**
-     * 
+     *
      */
     public function delete($id)
     {
@@ -130,7 +130,7 @@ class ResumeService
     }
 
     /**
-     * 
+     *
      */
     public function resumeInfos()
     {
@@ -148,7 +148,7 @@ class ResumeService
     }
 
     /**
-     * 
+     *
      */
     public function getResumeCsv($request)
     {
@@ -190,7 +190,7 @@ class ResumeService
     }
 
     /**
-     * 
+     *
      */
     private function resumesOccupationsRanking()
     {
@@ -207,7 +207,7 @@ class ResumeService
     }
 
     /**
-     * 
+     *
      */
     private function resumesQueryFilter(Request $request)
     {

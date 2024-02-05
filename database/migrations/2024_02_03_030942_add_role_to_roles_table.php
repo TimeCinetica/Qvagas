@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaycheckTable extends Migration
+class AddRoleToRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreatePaycheckTable extends Migration
      */
     public function up()
     {
-        Schema::create('paycheck', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        DB::table('roles')->insert([
+            'id' => 4,
+            'name' => 'colaborador',
+            'description' => 'colaborador qvagas',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 
     /**
@@ -26,6 +29,6 @@ class CreatePaycheckTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paycheck');
+        DB::table('roles')->where('id', 4)->delete();
     }
 }

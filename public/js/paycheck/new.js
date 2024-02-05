@@ -65,7 +65,7 @@ function _onStoreSuccess(response) {
         "success",
         "Sucesso!",
         "Novo admin cadastrado com sucesso.",
-        (r) => redirect("admins")
+        (r) => redirect("contracheque")
     );
     setIsLoading(false, "new-button");
 }

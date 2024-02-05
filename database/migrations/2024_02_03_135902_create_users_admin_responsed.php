@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaycheckTable extends Migration
+class CreateUsersAdminResponsed extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreatePaycheckTable extends Migration
      */
     public function up()
     {
-        Schema::create('paycheck', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('admin_responsed')->nullable();
         });
     }
 
@@ -26,6 +25,8 @@ class CreatePaycheckTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paycheck');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('admin_responsed');
+        });
     }
 }
