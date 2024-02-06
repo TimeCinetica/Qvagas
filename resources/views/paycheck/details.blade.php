@@ -49,7 +49,7 @@
     @foreach ($users as $user)
         <div class="d-flex ">
             {{ $user->name }}
-            <a type="button" class="btn btn-primary btn-dft" onclick="addPaycheck()">
+            <a type="button" class="btn btn-primary btn-dft" onclick="addPaycheck('{{ $user->name }}')">
             Adicionar <i class="bi bi-plus-square"></i>
             </a>
 
@@ -57,5 +57,6 @@
         <br>
     @endforeach
     </div>
+    
 </body>
 </html>
