@@ -29,7 +29,7 @@
             <table id="list-admins-table" class="table table-striped fast-table">
                 <thead>
                     <tr>
-                        {{--<th class="text-center  ordeble-column" onclick="orderBy()">Nome <i id="order-filter-icon" class="bi bi-caret-down"></i></th>--}}
+                        {{--<th class="text-center ordeble-column" onclick="orderBy()">Nome <i id="order-filter-icon" class="bi bi-caret-down"></i></th>--}}
                         <th class="text-center">Nome</th>
                         <th class="text-center">Email</th>
                         <th class="text-center">Cargo</th>
