@@ -2,26 +2,31 @@ function addCooperator() {
     redirect("contracheque/new");
 }
 
-function addPaycheck() {
-    _upsertPaycheck("Novo Contracheque", _addPaycheck);
+
+
+function addPaycheck(name) {
+    _upsertPaycheck("Novo Contracheque", _addPaycheck, { name: name });
 }
 
 function _upsertPaycheck(title, actionFn, params = null) {
-    const text = params && params.name ? params.name : "";
+    const name = params && params.name ? params.name : "";
     Swal.fire({
         title: title,
-        input: "text",
+        html: `
+            <input id="name" type="text" value="${name}" readonly />
+            <input id="file" type="file" />
+        `,
         icon: "question",
-        inputValue: text,
         showCancelButton: true,
         confirmButtonText: "Salvar",
         cancelButtonText: "Voltar",
         allowEscapeKey: false,
         allowOutsideClick: false,
         confirmButtonColor: "var(--primary)",
-        preConfirm: (name) => {
+        preConfirm: () => {
             const data = params ? { ...params, name } : name;
-            actionFn(data);
+            const file = document.getElementById('file').files[0];
+            actionFn(data, file);
             return false;
         },
         didOpen: () => {
@@ -30,6 +35,7 @@ function _upsertPaycheck(title, actionFn, params = null) {
         },
     });
 }
+
 
 function _addPaycheck(name) {
     const data = { name };

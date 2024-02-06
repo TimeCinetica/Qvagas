@@ -48,7 +48,7 @@
                         <td class="text-center">{{$user->roleId}}</td>
                         <td class="text-center">{{$user->created_at}}</td>
                         <td class="text-center">
-                            <center><a type="button" class="btn btn-primary btn-dft" onclick="addPaycheck()">
+                            <center><a type="button" class="btn btn-primary btn-dft" onclick="addPaycheck('{{ $user->name }}')">
                             <i class="bi bi-plus-square"></i>
                             </a></center>
                         </td>
@@ -63,6 +63,8 @@
     <br>
     
 
+
     </div>
+    
 </body>
 </html>
