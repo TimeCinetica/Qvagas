@@ -30,14 +30,31 @@
                 <thead>
                     <tr>
                         {{--<th class="text-center  ordeble-column" onclick="orderBy()">Nome <i id="order-filter-icon" class="bi bi-caret-down"></i></th>--}}
-                        <th class="text-center cpf-col">CPF</th>
+                        <th class="text-center">Nome</th>
                         <th class="text-center">Email</th>
                         <th class="text-center">Cargo</th>
                         <th class="text-center">Data de Cadastro</th>
-                        
+                        <th class="text-center">Contracheques</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($users as $user)
+                    <tr>
+                        <div class="d-flex ">
+                        <td class="text-center">
+                            <a href="{{route("paycheck.collaborator", $user->id)}}">{{ $user->name }}</a>
+                        </td>
+                        <td class="text-center">{{$user->email}}</td>
+                        <td class="text-center">{{$user->roleId}}</td>
+                        <td class="text-center">{{$user->created_at}}</td>
+                        <td class="text-center">
+                            <center><a type="button" class="btn btn-primary btn-dft" onclick="addPaycheck('{{ $user->name }}')">
+                            <i class="bi bi-plus-square"></i>
+                            </a></center>
+                        </td>
+                        </div>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
             
@@ -46,16 +63,7 @@
     <br>
     
 
-    @foreach ($users as $user)
-        <div class="d-flex ">
-            {{ $user->name }}
-            <a type="button" class="btn btn-primary btn-dft" onclick="addPaycheck('{{ $user->name }}')">
-            Adicionar <i class="bi bi-plus-square"></i>
-            </a>
 
-        </div>
-        <br>
-    @endforeach
     </div>
     
 </body>

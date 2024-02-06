@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Payslip;
 
 use App\Http\middleware\HasPaycheckAccess;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\PaycheckService;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Services\AuthService;
 use App\Models\User;
+use App\Models\Paycheck;
 
 class PaylispWebController extends Controller
 {
@@ -29,7 +31,6 @@ class PaylispWebController extends Controller
         $admin_responsed = $paycheckArmazem[0]->name;
         $users = User::where('admin_responsed', $admin_responsed)->get();
 
-
         return view('paycheck.details', [
             'paycheckArmazem' => $paycheckArmazem,
             'users' => $users,
@@ -44,6 +45,14 @@ class PaylispWebController extends Controller
             'paycheckArmazem' => $paycheckArmazem,
         ]);
     }
+    public function CrenderPaychecks(Request $request, $id){
+        $user= User::find($id);
+        $paycheckes= DB::table('paycheck')->where('user_id', $id)->get();
 
+        return view('paycheck.User', [
+            'user' => $user,
+            'paycheckes' => $paycheckes,
+        ]);
+    }
 
 }
