@@ -9,5 +9,6 @@ Route::middleware(['throttle:300,1'])->group(function () {
         Route::get('/contracheque/new', [PaylispWebController::class, 'renderNewPaycheck']);
         Route::post('/contracheque', [PaylispWebController::class, 'store']);
         Route::get('/{id?}/contracheques',[PaylispWebController::class,'CrenderPaychecks'])->name('paycheck.collaborator');
+        Route::get('/storage/{filename}', [PaylispWebController::class, 'serve']);
     });
 });

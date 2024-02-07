@@ -194,4 +194,12 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo(City::class, 'cityId');
     }
+
+    /**
+     * 
+     */
+    public function paycheck()
+    {
+        return $this->hasMany(Paycheck::class, 'nameUser');
+    }
 }

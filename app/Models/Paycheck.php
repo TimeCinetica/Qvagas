@@ -12,13 +12,5 @@ class Paycheck extends Model
 
    protected $table = 'paycheck';
    protected $fillable = ['nameUser', 'paycheckpdf'];
-/*
-    public function paycheckJoin()
-    {
-        $paycheck = DB::table('paycheck')
-        ->join('users', 'paycheck.user_id', '=', 'users.id');
 
-        return $paycheck;
-    }
-*/
 }

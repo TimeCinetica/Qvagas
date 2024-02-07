@@ -36,6 +36,11 @@ class PaylispWebController extends Controller
         $paycheckArmazem = $this->PaycheckService->index($request);
         $admin_responsed = $paycheckArmazem[0]->name;
         $users = User::where('admin_responsed', $admin_responsed)->get();
+        //dd($users);
+
+        foreach ($users as $user) {
+            $user->paychecks = Paycheck::where('nameUser', $user->name)->get();
+        }
 
         return view('paycheck.details', [
             'paycheckArmazem' => $paycheckArmazem,
@@ -70,10 +75,24 @@ class PaylispWebController extends Controller
 
         if($request->hasFile('paycheckpdf')){
             $file = $request->file('paycheckpdf');
-            $path = Storage::putFile('paychecks', $file);
+            $path = Storage::putFile('public/paychecks', $file);
             //dd($path);
             Paycheck::create(['nameUser' => $nameUser, 'paycheckpdf' => $path]);
 
         }
+    }
+
+    public function serve ($filename) {
+        $path = storage_path('app/public/' . $filename);
+
+        if (!Storage::exists($path)) {
+            abort(404);
+        }
+
+        $file = Storage::get($path);
+        $type = Storage::mimeType($path);
+
+        return (new Response($file, 200))
+              ->header("Content-Type", $type);
     }
 }
