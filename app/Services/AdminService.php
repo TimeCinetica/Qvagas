@@ -52,7 +52,6 @@ class AdminService
      */
     public function newAdmin($request)
     {
-        //dd($request->admin_responsed);
         $cpf = preg_replace('/[^0-9]/', '', $request->cpf);
         $this->utilsService->validateCpf($cpf);
 
@@ -61,8 +60,8 @@ class AdminService
             'cpf'           => $cpf,
             'created_at'    => now(),
             'updated_at'    => now(),
-            'birthDate'     => now(),
-            'cellphone'     => $cpf,
+            'birthDate'     => $request->date,
+            'cellphone'     => $request->tel,
             'schooling'     => 'sadmin',
             'cep'           => '29111111',
             'address'       => 'admin',
@@ -77,6 +76,7 @@ class AdminService
             'hasChildren'   => 0,
             'availableTravel' => 1,
             'admin_responsed' => $request->admin_responsed,
+            'job'           => $request->job,
         ]);
 
         $admin = null;

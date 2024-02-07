@@ -17,7 +17,7 @@
                     </div>
                     <form method="POST" onsubmit="storeAdmin(event)" id="new-admin-form" novalidate>
                         <div class="form-group">
-                            <label for="name">admin </label>
+                            <label for="name">Admin </label>
                             <input type="text" id="admin_responsed" name="admin_responsed" class="form-control" value="{{ $paycheckArmazem[0]->name }}" readonly required>
                             @include('components.form.validation', ['invalidMessage' => "Nome obrigatório"])
                         </div>
@@ -34,6 +34,21 @@
                         <div class="form-group">
                             <label for="email">E-mail *</label>
                             <input type="email" class="form-control" name="email" id="email" required>
+                            @include('components.form.validation', ['invalidMessage' => "E-mail obrigatório"])
+                        </div>
+                        <div class="form-group">
+                            <label for="tel">Telefone *</label>
+                            <input type="tel" class="form-control" name="tel" id="tel" required>
+                            @include('components.form.validation', ['invalidMessage' => "E-mail obrigatório"])
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Data de Admissão *</label>
+                            <input type="date" class="form-control" name="date" id="date" required>
+                            @include('components.form.validation', ['invalidMessage' => "E-mail obrigatório"])
+                        </div>
+                        <div class="form-group">
+                            <label for="km">Cargo *</label>
+                            <input type="text" class="form-control" name="job" id="job" required>
                             @include('components.form.validation', ['invalidMessage' => "E-mail obrigatório"])
                         </div>
                         <div class="form-group">

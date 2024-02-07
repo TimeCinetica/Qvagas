@@ -36,7 +36,6 @@ class PaylispWebController extends Controller
         $paycheckArmazem = $this->PaycheckService->index($request);
         $admin_responsed = $paycheckArmazem[0]->name;
         $users = User::where('admin_responsed', $admin_responsed)->get();
-        //dd($users);
 
         foreach ($users as $user) {
             $user->paychecks = Paycheck::where('nameUser', $user->name)->get();

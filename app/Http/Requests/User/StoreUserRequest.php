@@ -79,6 +79,7 @@ class StoreUserRequest extends FormRequest
             'resumeCompanies'   => ['nullable', 'array'],
             'resumeLanguagues'  => ['nullable', 'array'],
             'admin_responsed'   => ['nullable'],
+            'job'               => ['nullable'],
         ];
     }
 }
