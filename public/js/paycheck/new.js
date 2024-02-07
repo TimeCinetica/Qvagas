@@ -13,10 +13,13 @@ function storeAdmin(event) {
 
     if (formIsValid) {
         const data = {
-            name: $("#name").val(),
             admin_responsed: $("#admin_responsed").val(),
+            name: $("#name").val(),
             cpf: normalizeNumber($("#cpf").val()),
             email: $("#email").val(),
+            tel: $("#tel").val(),
+            date: $("#date").val(),
+            job: $("#job").val(),
             roleId: $("#role").val(),
             password: $("#password").val(),
         };

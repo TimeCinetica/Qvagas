@@ -59,7 +59,8 @@ class User extends Authenticatable implements JWTSubject
         'evaluated', // Avaliado pela equipe QVagas
         'stamped', // Selo de Talentos do LabCarreiras,
         'passwordResetedAt',
-        'admin_responsed'
+        'admin_responsed',
+        'job'
     ];
 
     /**
