@@ -11,7 +11,7 @@ class Paycheck extends Model
    use HasFactory;
 
    protected $table = 'paycheck';
-   protected $fillable = ['nameUser', 'filePath'];
+   protected $fillable = ['nameUser', 'paycheckpdf'];
 /*
     public function paycheckJoin()
     {

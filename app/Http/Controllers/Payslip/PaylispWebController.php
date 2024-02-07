@@ -11,6 +11,7 @@ use App\Services\UserService;
 use App\Services\AuthService;
 use App\Models\User;
 use App\Models\Paycheck;
+use Illuminate\Support\Facades\Storage;
 
 class PaylispWebController extends Controller
 {
@@ -64,9 +65,15 @@ class PaylispWebController extends Controller
     }
 
     public function store(Request $request) {
+
         $nameUser = $request->get('nameUser');
-        Paycheck::create(['nameUser' => $nameUser]);
 
+        if($request->hasFile('paycheckpdf')){
+            $file = $request->file('paycheckpdf');
+            $path = Storage::putFile('paychecks', $file);
+            //dd($path);
+            Paycheck::create(['nameUser' => $nameUser, 'paycheckpdf' => $path]);
+
+        }
     }
-
 }

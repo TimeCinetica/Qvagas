@@ -14,9 +14,7 @@ function _upsertPaycheck(title, actionFn, params = null) {
         title: title,
         html: `
             <input id="name" type="text" value="${name}" readonly />
-            <!--
             <input id="file" type="file" name="paycheckpdf"/>
-            -->
         `,
         icon: "question",
         showCancelButton: true,
@@ -38,13 +36,18 @@ function _upsertPaycheck(title, actionFn, params = null) {
 
 
 function _addPaycheck(name) {
-    const data = { nameUser: name };
+    const fileInput = document.getElementById('file');
+    const file = fileInput.files[0];
+    const formData = new FormData();
+    formData.append('nameUser', name);
+    formData.append('paycheckpdf', file);
+
     const endpoint = url("contracheque");
 
     setTimeout(() => $("#swal2-cancel").attr("disabled", "disabled"), 0);
 
     setIsLoading(true, "swal2-confirm");
-    request(endpoint, "POST", data, _onSuccessUpsertPaycheck, _onUpsertFail);
+    request(endpoint, "POST", formData, _onSuccessUpsertPaycheck, _onUpsertFail, true, true);
 }
 
 function _onSuccessUpsertPaycheck() {
