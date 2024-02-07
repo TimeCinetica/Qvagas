@@ -68,7 +68,8 @@
             "@php artisan key:generate --ansi"
         ],
         "post-install-cmd": [
-            "php artisan storage:link"
+            "php artisan storage:link",
+            "php artisan jwt:secret --force"
         ]
     }
 }
