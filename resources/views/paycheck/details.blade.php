@@ -29,10 +29,12 @@
             <table id="list-colaborators-table" class="table table-striped fast-table">
                 <thead>
                     <tr>
+                        <th class="text-start">Profissão</th>
                         <th class="text-start">Email</th>
-                        <th class="text-start">Cargo</th>
-                        <th class="text-start">Data de Cadastro</th>
+                        <th class="text-start">Ultima atualização</th>
+                        <th class="text-start">Status</th>
                         <th class="text-start">Contracheques</th>
+                        <th class="text-start">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,9 +50,10 @@
                         <div class="collapse" id="user-{{ $user->id }}" >
                             <table class="table">
                                 <tr>
+                                    <td class="text-start">{{$user->job}}</td>
                                     <td class="text-start">{{$user->email}}</td>
-                                    <td class="text-start">{{$user->roleId}}</td>
-                                    <td class="text-start">{{$user->created_at}}</td>
+                                    <td class="text-start">01/01/2001</td>
+                                    <td class="text-start">ativo</td>
                                     <td class="text-start">@foreach ($user->paychecks as $paycheck)
                                         <a href="{{ Storage::url($paycheck->paycheckpdf) }}">Ver Contracheque</a><br>
                                     @endforeach
@@ -58,7 +61,9 @@
                                         <a type="button" class="btn btn-primary btn-dft" onclick="addPaycheck('{{ $user->name }}')">
                                             <i class="bi bi-plus-square"></i>
                                         </a>
-                                    </center></td>
+                                    </center>
+                                    </td>
+                                    <td class="text-start">editar</td>
                                 </tr>
                                     
                                 
