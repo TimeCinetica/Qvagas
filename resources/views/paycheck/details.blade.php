@@ -29,7 +29,7 @@
             <table id="list-admins-table" class="table table-striped fast-table">
                 <thead>
                     <tr>
-                        {{--<th class="text-center  ordeble-column" onclick="orderBy()">Nome <i id="order-filter-icon" class="bi bi-caret-down"></i></th>--}}
+                        {{--<th class="text-center ordeble-column" onclick="orderBy()">Nome <i id="order-filter-icon" class="bi bi-caret-down"></i></th>--}}
                         <th class="text-center">Nome</th>
                         <th class="text-center">Email</th>
                         <th class="text-center">Cargo</th>
@@ -48,6 +48,11 @@
                         <td class="text-center">{{$user->roleId}}</td>
                         <td class="text-center">{{$user->created_at}}</td>
                         <td class="text-center">
+                            @foreach ($user->paychecks as $paycheck)
+                                <div>
+                                    <a href="{{ Storage::url($paycheck->paycheckpdf) }}">Ver Contracheque</a>
+                                </div>
+                            @endforeach
                             <center><a type="button" class="btn btn-primary btn-dft" onclick="addPaycheck('{{ $user->name }}')">
                             <i class="bi bi-plus-square"></i>
                             </a></center>

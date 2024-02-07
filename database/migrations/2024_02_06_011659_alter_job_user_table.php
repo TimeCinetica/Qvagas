@@ -14,7 +14,7 @@ class AlterJobUserTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-          $table->string('job');
+          $table->string('job')->nullable();
         });
     }
 

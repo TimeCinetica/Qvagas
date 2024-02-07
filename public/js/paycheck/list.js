@@ -14,7 +14,7 @@ function _upsertPaycheck(title, actionFn, params = null) {
         title: title,
         html: `
             <input id="name" type="text" value="${name}" readonly />
-            <input id="file" type="file" />
+            <input id="file" type="file" name="paycheckpdf"/>
         `,
         icon: "question",
         showCancelButton: true,
@@ -24,10 +24,8 @@ function _upsertPaycheck(title, actionFn, params = null) {
         allowOutsideClick: false,
         confirmButtonColor: "var(--primary)",
         preConfirm: () => {
-            const data = params ? { ...params, name } : name;
-            const file = document.getElementById('file').files[0];
-            actionFn(data, file);
-            return false;
+            actionFn(name);
+            return false
         },
         didOpen: () => {
             $(".swal2-confirm").attr("id", "swal2-confirm");
@@ -38,11 +36,27 @@ function _upsertPaycheck(title, actionFn, params = null) {
 
 
 function _addPaycheck(name) {
-    const data = { name };
-    const endpoint = url("occupations");
+    const fileInput = document.getElementById('file');
+    const file = fileInput.files[0];
+    const formData = new FormData();
+    formData.append('nameUser', name);
+    formData.append('paycheckpdf', file);
+
+    const endpoint = url("contracheque");
 
     setTimeout(() => $("#swal2-cancel").attr("disabled", "disabled"), 0);
 
     setIsLoading(true, "swal2-confirm");
-    request(endpoint, "POST", data, _onSuccessUpsertOccupation, _onUpsertFail);
+    request(endpoint, "POST", formData, _onSuccessUpsertPaycheck, _onUpsertFail, true, true);
+}
+
+function _onSuccessUpsertPaycheck() {
+    Swal.close();
+    sweetAlert("success", "Sucesso!", "Profissão salva com sucesso!", (r) =>
+        location.reload()
+    );
+}
+
+function _onUpsertFail(error) {
+    sweetAlert("error", "Ops!", getErrorMessage(error));
 }
