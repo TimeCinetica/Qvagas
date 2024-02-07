@@ -16,15 +16,20 @@ class PaylispWebController extends Controller
 {
     protected $PaycheckService;
     protected $userService;
+
+
     public function __construct( PaycheckService $PaycheckService ) {
         $this->PaycheckService = $PaycheckService;
     }
-    public function index(Request $request)
-    {
+
+
+    public function index(Request $request){
         $paycheckArmazem = $this->PaycheckService->index($request);
        
         return response()->json($paycheckArmazem, 200);
     }
+
+
     public function renderPaycheck(Request $request){
 
         $paycheckArmazem = $this->PaycheckService->index($request);
@@ -37,6 +42,7 @@ class PaylispWebController extends Controller
         ]);
     }
 
+
     public function renderNewPaycheck(Request $request){
 
         $paycheckArmazem = $this->PaycheckService->index($request);
@@ -45,6 +51,8 @@ class PaylispWebController extends Controller
             'paycheckArmazem' => $paycheckArmazem,
         ]);
     }
+
+
     public function CrenderPaychecks(Request $request, $id){
         $user= User::find($id);
         $paycheckes= DB::table('paycheck')->where('user_id', $id)->get();
@@ -53,6 +61,12 @@ class PaylispWebController extends Controller
             'user' => $user,
             'paycheckes' => $paycheckes,
         ]);
+    }
+
+    public function store(Request $request) {
+        $nameUser = $request->get('nameUser');
+        Paycheck::create(['nameUser' => $nameUser]);
+
     }
 
 }

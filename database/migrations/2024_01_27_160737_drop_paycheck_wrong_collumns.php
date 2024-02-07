@@ -17,12 +17,7 @@ class DropPaycheckWrongCollumns extends Migration
             //columns
 
            $table->string('nameUser');
-           $table->unsignedBigInteger('user_id');
-           $table->string('paycheckpdf');
-
-           //constraint
-           $table->foreign('user_id')->references('id')->on('users');
-
+           $table->string('paycheckpdf')->nullable();
 
         });
     }

@@ -10,12 +10,13 @@ function addPaycheck(name) {
 
 function _upsertPaycheck(title, actionFn, params = null) {
     const name = params && params.name ? params.name : "";
-    let data;
     Swal.fire({
         title: title,
         html: `
             <input id="name" type="text" value="${name}" readonly />
+            <!--
             <input id="file" type="file" name="paycheckpdf"/>
+            -->
         `,
         icon: "question",
         showCancelButton: true,
@@ -25,10 +26,8 @@ function _upsertPaycheck(title, actionFn, params = null) {
         allowOutsideClick: false,
         confirmButtonColor: "var(--primary)",
         preConfirm: () => {
-            data = params ? { ...params, name } : name;
-            const file = document.getElementById('file').files[0];
-            actionFn(data, file);
-            return false;
+            actionFn(name);
+            return false
         },
         didOpen: () => {
             $(".swal2-confirm").attr("id", "swal2-confirm");
@@ -39,16 +38,13 @@ function _upsertPaycheck(title, actionFn, params = null) {
 
 
 function _addPaycheck(name) {
-    const formData = new FormData();
-    formData.append('name', data.name);
-    formData.append('paycheckpdf', file);
-
+    const data = { nameUser: name };
     const endpoint = url("contracheque");
 
     setTimeout(() => $("#swal2-cancel").attr("disabled", "disabled"), 0);
 
     setIsLoading(true, "swal2-confirm");
-    request(endpoint, "POST", formData, _onSuccessUpsertPaycheck, _onUpsertFail);
+    request(endpoint, "POST", data, _onSuccessUpsertPaycheck, _onUpsertFail);
 }
 
 function _onSuccessUpsertPaycheck() {

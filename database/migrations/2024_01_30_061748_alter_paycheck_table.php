@@ -14,7 +14,7 @@ class AlterPaycheckTable extends Migration
     public function up()
     {
         Schema::table('paycheck', function (Blueprint $table) {
-          $table->string('nomeAdmin');
+          $table->string('nomeAdmin')->nullable();
         });
     }
 
