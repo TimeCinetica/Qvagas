@@ -17,7 +17,7 @@
             </div>
             <table id="list-paychecks-table" class="table table-striped fast-table">
                 <thead>
-                    <tr><th class="text-center cpf-col"></th>
+                    <tr>
                         <th class="text-center">Enviado por</th>
                         <th class="text-center">Criado em</th>
                         <th class="text-center">Contracheques</th>
@@ -27,10 +27,9 @@
                 <tbody>
                     @foreach ($paycheckes as $paycheck)
                     <tr>
-                        <td>{{$paycheck->nomeAdmin}}</td>
-                        <td>{{$paycheck->created_at}}</td>
-                        <td>{{$paycheck->paycheckpdf}}</td>
-                        <td>não</td>
+                        <td class="text-center">{{$user->admin_responsed}}</td>
+                        <td class="text-center">{{$paycheck->created_at}}</td>
+                        <td class="text-center"><a href="{{ Storage::url($paycheck->paycheckpdf) }}">Ver Contracheque</a></td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -41,4 +40,5 @@
     <br>
     </div>
 </body>
+</html>
 </html>
