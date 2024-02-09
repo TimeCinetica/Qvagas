@@ -1,3 +1,20 @@
+<?php
+    setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+    date_default_timezone_set('America/Sao_Paulo');
+    
+    function monthName($date) {
+        $date = DateTime::createFromFormat('m/Y', $date);
+        if ($date instanceof DateTime) {
+            return strftime('%B', $date->getTimestamp());
+        } else {
+            // Retorne algum valor padrão ou manipule o erro como achar melhor
+            return 'Data inválida';
+        }
+    }
+    
+    
+?>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -57,7 +74,8 @@
                                     @foreach ($user->paychecks as $paycheck)
                                         <td>                            
                                             <center>
-                                                <a class=" btn btn-primary btn-dft" href="{{ Storage::url($paycheck->paycheckpdf)}}">{{ \Carbon\Carbon::parse($paycheck->updated_at)->format('F/Y') }}</a>
+                                            <a class=" btn btn-primary btn-dft" href="{{ Storage::url($paycheck->paycheckpdf)}}">{{ monthName($paycheck->month_year) }}</a>
+
                                             </center>
                                         </td>   
                                         <td class="text-end">

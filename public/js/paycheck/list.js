@@ -9,7 +9,6 @@ function addPaycheck(name) {
 function _upsertPaycheck(title, actionFn, params = null, isEdit = false) {
     const name = params && params.name ? params.name : "";
     const id = isEdit && params && params.id ? params.id : null;
-
     Swal.fire({
         title: title,
         html: `
@@ -30,6 +29,7 @@ function _upsertPaycheck(title, actionFn, params = null, isEdit = false) {
             const date = document.getElementById('date').value;
             const numbers = date.replace(/\D/g, ''); // Remove non-digits
             const file = document.getElementById('file').files[0]; // Get the file
+            const month_year = document.getElementById('date').value;
 
             if (!file) {
                 Swal.showValidationMessage('Por favor, anexe um documento PDF.');
@@ -44,7 +44,7 @@ function _upsertPaycheck(title, actionFn, params = null, isEdit = false) {
             if (!isEdit) {
                 actionFn(name);
             } else {
-                actionFn({ id: id, name: name })
+                actionFn({ id: id, name: name, month_year: month_year })
             }
 
             return false
@@ -101,13 +101,14 @@ function _onUpsertFail(error) {
 }
 
 // Função para editar um contracheque
-function editPaycheck(id, name) {
-    _upsertPaycheck("Editar Contracheque", _editPaycheck, { id: id, name: name }, true);
+function editPaycheck(id, name, month_year) {
+    _upsertPaycheck("Editar Contracheque", _editPaycheck, { id: id, name: name, month_year: month_year }, true);
 }
 
 function _editPaycheck(params) {
     const id = params && params.id ? params.id : "";
     const name = params && params.name ? params.name : "";
+    const month_year = params && params.month_year ? params.month_year : "";
 
     const fileInput = document.getElementById('file');
     const file = fileInput.files[0];
@@ -117,6 +118,7 @@ function _editPaycheck(params) {
     formData.append('id', id);
     formData.append('nameUser', name);
     formData.append('paycheckpdf', file);
+    formData.append('month_year', month_year);
 
     const endpoint = url("contracheque/update");
 

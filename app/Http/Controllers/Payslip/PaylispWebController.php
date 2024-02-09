@@ -100,6 +100,7 @@ class PaylispWebController extends Controller
     {
         $id = $request->get('id');
         $nameUser = $request->get('nameUser');
+        $month_year = $request->get('month_year');
 
         if ($request->hasFile('paycheckpdf')) {
             $file = $request->file('paycheckpdf');
@@ -111,7 +112,7 @@ class PaylispWebController extends Controller
                 return response()->json(['error' => 'Contracheque não encontrado'], 404);
             }
 
-            $paycheck->update(['nameUser' => $nameUser, 'paycheckpdf' => $path]);
+            $paycheck->update(['nameUser' => $nameUser, 'paycheckpdf' => $path, 'month_year' => $month_year]);
 
             return response()->json(['message' => 'Contracheque atualizado com sucesso']);
         } else {
