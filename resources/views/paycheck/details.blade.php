@@ -54,16 +54,25 @@
                                     <td class="text-center">{{$user->email}}</td>
                                     <td class="text-center">{{$user->updated_at}}</td>
                                     <td class="text-center">@if($user->status)Ativo @else Inativo @endif</td>
-                                    <td class="text-center">@foreach ($user->paychecks as $paycheck)
-                                        <a class="btn btn-primary btn-dft" href="{{ Storage::url($paycheck->paycheckpdf)}}">-</a><br>
+                                    @foreach ($user->paychecks as $paycheck)
+                                        <td>                            
+                                            <center>
+                                                <a class=" btn btn-primary btn-dft" href="{{ Storage::url($paycheck->paycheckpdf)}}">{{ \Carbon\Carbon::parse($paycheck->updated_at)->format('F/Y') }}</a>
+                                            </center>
+                                        </td>   
+                                        <td class="text-end">
+                                                <i class="btn bi-pencil-square btn-sm" onclick="editPaycheck('{{$paycheck->id}}','{{ $user->name }}')"></i>
+
+                                                <i class="btn btn-danger bi-trash btn-smon" onclick="deletePaycheck('{{$paycheck->id}}')"></i>
+                                        </td>
+                                    </tr>
+                                        <td colspan="4"></td>
                                     @endforeach
-                                    <center>
-                                        <a type="button" class="btn btn-primary btn-dft" onclick="addPaycheck('{{ $user->name }}','{{$user->admin_responsed}}')">
-                                            <i class="bi bi-plus-square"></i>
-                                        </a>
-                                    </center>
+                                    <td>
+                                        <center>
+                                            <a class="btn btn-primary bi-plus-square btn-dft" onclick="addPaycheck('{{ $user->name }}')"></a>
+                                        </center>
                                     </td>
-                                    <td class="text-start">editar</td>
                                 </tr>
                                     
                                 
