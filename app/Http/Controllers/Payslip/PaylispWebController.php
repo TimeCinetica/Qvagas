@@ -105,15 +105,12 @@ class PaylispWebController extends Controller
             $file = $request->file('paycheckpdf');
             $path = Storage::putFile('public/paychecks', $file);
 
-            // Encontre o contracheque pelo ID
             $paycheck = Paycheck::find($id);
 
-            // Verifique se o contracheque foi encontrado
             if (!$paycheck) {
                 return response()->json(['error' => 'Contracheque não encontrado'], 404);
             }
 
-            // Atualize os atributos necessários
             $paycheck->update(['nameUser' => $nameUser, 'paycheckpdf' => $path]);
 
             return response()->json(['message' => 'Contracheque atualizado com sucesso']);

@@ -119,18 +119,15 @@ function deletePaycheck(id) {
                     'X-CSRF-TOKEN': token
                 },
                 success: function (response) {
-                    // Exibindo uma mensagem de sucesso usando SweetAlert2
                     Swal.fire({
                         title: 'Excluído!',
                         text: response.message,
                         icon: 'success',
                     }).then(() => {
-                        // Recarregar a página ou tomar outras ações necessárias
                         location.reload();
                     });
                 },
                 error: function (error) {
-                    // Exibindo uma mensagem de erro usando SweetAlert2
                     Swal.fire({
                         title: 'Erro!',
                         text: error.responseJSON.error,
