@@ -17,20 +17,22 @@
             </div>
             <table id="list-paychecks-table" class="table table-striped fast-table">
                 <thead>
-                    <tr><th class="text-center cpf-col"></th>
+                    <tr>
                         <th class="text-center">Enviado por</th>
-                        <th class="text-center">Criado em</th>
-                        <th class="text-center">Contracheques</th>
-                        <th class="text-center">Status</th>               
+                        <th class="text-center">Atualizado em</th>
+                        <th class="text-center">Contracheques</th>             
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($paycheckes as $paycheck)
                     <tr>
-                        <td>{{$paycheck->nomeAdmin}}</td>
-                        <td>{{$paycheck->created_at}}</td>
-                        <td>{{$paycheck->paycheckpdf}}</td>
-                        <td>não</td>
+                        <td class="text-center">{{$user->admin_responsed}}</td>
+                        <td class="text-center">{{$paycheck->updated_at}}</td>
+                        <td class=>
+                            <center>
+                                <a class=" btn btn-primary btn-dft" href="{{ Storage::url($paycheck->paycheckpdf)}}">{{ \Carbon\Carbon::parse($paycheck->updated_at)->format('F/Y') }}</a>
+                            </center>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -41,4 +43,5 @@
     <br>
     </div>
 </body>
+</html>
 </html>

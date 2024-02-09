@@ -13,7 +13,7 @@ class AlterStatusPaycheckTable extends Migration
      */
     public function up()
     {
-        Schema::table('paycheck', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
           $table->boolean('status')->default(true);
         });
     }

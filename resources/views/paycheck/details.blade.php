@@ -29,41 +29,50 @@
             <table id="list-colaborators-table" class="table table-striped fast-table">
                 <thead>
                     <tr>
-                        <th class="text-start">Profissão</th>
-                        <th class="text-start">Email</th>
-                        <th class="text-start">Ultima atualização</th>
-                        <th class="text-start">Status</th>
-                        <th class="text-start">Contracheques</th>
-                        <th class="text-start">Ações</th>
+                        <th class="text-center">Profissão</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Ultima atualização</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Contracheques</th>
+                        <th class="text-center">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                 @foreach ($users as $user)
                 <tr data-toggle="collapse" data-target="#user-{{ $user->id }}" class="accordion-toggle" style="cursor: pointer;">
-                    <td colspan="5" class="text-center">
+                    <td colspan="6" class="text-center">
                         <strong>{{ $user->name }}</strong>
                         <i class="bi bi-chevron-down" id="arrow-{{ $user->id }}"></i>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="5" style="padding: 0 !important;">
+                    <td colspan="6" style="padding: 0 !important;">
                         <div class="collapse" id="user-{{ $user->id }}" >
                             <table class="table">
                                 <tr>
-                                    <td class="text-start">{{$user->job}}</td>
-                                    <td class="text-start">{{$user->email}}</td>
-                                    <td class="text-start">01/01/2001</td>
-                                    <td class="text-start">ativo</td>
-                                    <td class="text-start">@foreach ($user->paychecks as $paycheck)
-                                        <a href="{{ Storage::url($paycheck->paycheckpdf) }}">Ver Contracheque</a><br>
+                                    <td class="text-center">{{$user->job}}</td>
+                                    <td class="text-center">{{$user->email}}</td>
+                                    <td class="text-center">{{$user->updated_at}}</td>
+                                    <td class="text-center">@if($user->status)Ativo @else Inativo @endif</td>
+                                    @foreach ($user->paychecks as $paycheck)
+                                        <td>                            
+                                            <center>
+                                                <a class=" btn btn-primary btn-dft" href="{{ Storage::url($paycheck->paycheckpdf)}}">{{ \Carbon\Carbon::parse($paycheck->updated_at)->format('F/Y') }}</a>
+                                            </center>
+                                        </td>   
+                                        <td class="text-end">
+                                                <i class="btn bi-pencil-square btn-sm" onclick="editPaycheck('{{$paycheck->id}}','{{ $user->name }}')"></i>
+
+                                                <i class="btn btn-danger bi-trash btn-smon" onclick="deletePaycheck('{{$paycheck->id}}')"></i>
+                                        </td>
+                                    </tr>
+                                        <td colspan="4"></td>
                                     @endforeach
-                                    <center>
-                                        <a type="button" class="btn btn-primary btn-dft" onclick="addPaycheck('{{ $user->name }}')">
-                                            <i class="bi bi-plus-square"></i>
-                                        </a>
-                                    </center>
+                                    <td>
+                                        <center>
+                                            <a class="btn btn-primary bi-plus-square btn-dft" onclick="addPaycheck('{{ $user->name }}')"></a>
+                                        </center>
                                     </td>
-                                    <td class="text-start">editar</td>
                                 </tr>
                                     
                                 
