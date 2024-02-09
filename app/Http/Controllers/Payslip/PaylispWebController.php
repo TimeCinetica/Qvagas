@@ -58,9 +58,10 @@ class PaylispWebController extends Controller
     }
 
 
-    public function CrenderPaychecks(Request $request, $id){
+    public function CrenderPaychecks(Request $request){
+        $id = $this->PaycheckService->index($request)[0]->id;
         $user= User::find($id);
-        $paycheckes= DB::table('paycheck')->where('user_id', $id)->get();
+        $paycheckes= DB::table('paycheck')->where('nameUser', $user->name)->get();
 
         return view('paycheck.User', [
             'user' => $user,
@@ -93,5 +94,39 @@ class PaylispWebController extends Controller
 
         return (new Response($file, 200))
               ->header("Content-Type", $type);
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->get('id');
+        $nameUser = $request->get('nameUser');
+
+        if ($request->hasFile('paycheckpdf')) {
+            $file = $request->file('paycheckpdf');
+            $path = Storage::putFile('public/paychecks', $file);
+
+            $paycheck = Paycheck::find($id);
+
+            if (!$paycheck) {
+                return response()->json(['error' => 'Contracheque não encontrado'], 404);
+            }
+
+            $paycheck->update(['nameUser' => $nameUser, 'paycheckpdf' => $path]);
+
+            return response()->json(['message' => 'Contracheque atualizado com sucesso']);
+        } else {
+            return response()->json(['error' => 'Nenhum arquivo PDF fornecido'], 400);
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        $id = $request->input('id');
+
+        $paycheck = Paycheck::find($id);
+
+        $paycheck->delete();
+
+        return response()->json(['message' => 'Contracheque excluído com sucesso']);
     }
 }
