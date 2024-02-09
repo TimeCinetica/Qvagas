@@ -110,7 +110,7 @@ class Controller extends BaseController
         // Buscar contracheques do usuário autenticado
         $paychecks = Paycheck::where('nameUser', $logged->name)->get();
 
-        return view('collaborator.home', ['paychecks' => $paychecks]);
+        return view('collaborator.home', ['paychecks' => $paychecks, 'name' => $logged->name]);
     }
 
     /**
