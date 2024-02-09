@@ -36,6 +36,13 @@ class ResumeWebController extends Controller
      */
     public function renderResume($userId)
     {
+        $loggedUser = auth()->user();
+
+        if ($loggedUser->isCollaborator()) {
+            // Redirecione para a tela de contracheques ou outra página apropriada
+            return redirect('paychecks.index');
+        }
+
         $user = $this->userService->getById($userId);
         $races = $this->raceService->index();
         $vacancyTypes = $this->vacancyTypes->index();
@@ -57,6 +64,13 @@ class ResumeWebController extends Controller
      */
     public function renderResumes(Request $request)
     {
+        $loggedUser = auth()->user();
+
+        if ($loggedUser->isCollaborator()) {
+            // Redirecione para a tela de contracheques ou outra página apropriada
+            return redirect('paychecks.index');
+        }
+
         $policies = $this->getResumePolicies();
         $resumes = $this->resumeService->indexResumes($request);
         return view('admin.resumes', ['resumes' => $resumes, 'policies' => $policies]);

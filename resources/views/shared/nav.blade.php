@@ -43,12 +43,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                @if(auth()->user()->roleId != 4)
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" onclick="goToResume({{auth()->user()->id}})">Meu Currículo</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" target="_blank" href="https://qvagas.quallitypsi.com.br/index.php/anuncios/">Busca Por Vaga</a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" target="_blank" href="https://qvagas.quallitypsi.com.br/index.php/ajuda/">Ajuda</a>
                 </li>

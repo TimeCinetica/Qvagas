@@ -42,6 +42,15 @@ class AuthService
     }
 
     /**
+     * Check if a user is collaborator
+     */
+    public function isCollaborator()
+    {
+        $user = $this->authenticatedUser();
+        return isset($user) && $user->isCollaborator();
+    }
+
+    /**
      * Check if requester has access to resume
      * @param int $userId
      */

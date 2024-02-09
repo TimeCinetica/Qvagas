@@ -67,7 +67,7 @@ function _onStoreSuccess(response) {
     sweetAlert(
         "success",
         "Sucesso!",
-        "Novo admin cadastrado com sucesso.",
+        "Novo colaborador cadastrado com sucesso.",
         (r) => redirect("contracheque")
     );
     setIsLoading(false, "new-button");

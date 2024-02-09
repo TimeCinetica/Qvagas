@@ -9,12 +9,12 @@ class DefaultSerializer extends ArraySerializer
     /**
      * Serialize a collection.
      *
-     * @param string $resourceKey
+     * @param string|null $resourceKey
      * @param array  $data
      *
      * @return array
      */
-    public function collection($resourceKey, array $data)
+    public function collection(?string $resourceKey, array $data): array
     {
         return $resourceKey ? [$resourceKey => $data] : $data;
     }
@@ -22,12 +22,12 @@ class DefaultSerializer extends ArraySerializer
     /**
      * Serialize an item.
      *
-     * @param string $resourceKey
+     * @param string|null $resourceKey
      * @param array  $data
      *
      * @return array
      */
-    public function item($resourceKey, array $data)
+    public function item(?string $resourceKey, array $data): array
     {
         return $data;
     }
@@ -37,10 +37,11 @@ class DefaultSerializer extends ArraySerializer
      *
      * @return array
      */
-    public function null()
+    public function null(): ?array
     {
         return [];
     }
+
 
     /**
      * Serialize the meta.
@@ -49,7 +50,7 @@ class DefaultSerializer extends ArraySerializer
      *
      * @return array
      */
-    public function meta(array $meta)
+    public function meta(array $meta): array
     {
         if (empty($meta)) {
             return [];
@@ -57,4 +58,5 @@ class DefaultSerializer extends ArraySerializer
 
         return ['meta' => $meta];
     }
+
 }

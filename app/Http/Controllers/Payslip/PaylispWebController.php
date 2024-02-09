@@ -71,12 +71,12 @@ class PaylispWebController extends Controller
     public function store(Request $request) {
 
         $nameUser = $request->get('nameUser');
+        $date = $request->month_year;
 
         if($request->hasFile('paycheckpdf')){
             $file = $request->file('paycheckpdf');
             $path = Storage::putFile('public/paychecks', $file);
-            //dd($path);
-            Paycheck::create(['nameUser' => $nameUser, 'paycheckpdf' => $path]);
+            Paycheck::create(['nameUser' => $nameUser, 'paycheckpdf' => $path, 'month_year' => $date]);
 
         }
     }
