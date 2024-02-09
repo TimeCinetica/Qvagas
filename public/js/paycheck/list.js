@@ -25,7 +25,11 @@ function _upsertPaycheck(title, actionFn, params = null, isEdit = false) {
         allowOutsideClick: false,
         confirmButtonColor: "var(--primary)",
         preConfirm: () => {
-            actionFn(name);
+            if (!isEdit) {
+                actionFn(name);
+            } else {
+                actionFn({ id: id, name: name })
+            }
             return false
         },
         didOpen: () => {
@@ -74,10 +78,6 @@ function _editPaycheck(params) {
     const fileInput = document.getElementById('file');
     const file = fileInput.files[0];
 
-    _updatePaycheck(id, name, file);
-}
-
-function _updatePaycheck(id, name, file) {
     const formData = new FormData();
     formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
     formData.append('id', id);
@@ -91,6 +91,7 @@ function _updatePaycheck(id, name, file) {
     setIsLoading(true, "swal2-confirm");
     request(endpoint, "POST", formData, _onSuccessUpdatePaycheck, _onUpsertFail, true, true);
 }
+
 
 function _onSuccessUpdatePaycheck(response) {
     Swal.close();

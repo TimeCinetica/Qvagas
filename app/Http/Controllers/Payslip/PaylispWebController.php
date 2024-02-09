@@ -80,7 +80,6 @@ class PaylispWebController extends Controller
 
         }
     }
-    
 
     public function serve ($filename) {
         $path = storage_path('app/public/' . $filename);
@@ -98,8 +97,8 @@ class PaylispWebController extends Controller
 
     public function update(Request $request)
     {
-        $id = $request->input('id');
-        $nameUser = $request->input('nameUser');
+        $id = $request->get('id');
+        $nameUser = $request->get('nameUser');
 
         if ($request->hasFile('paycheckpdf')) {
             $file = $request->file('paycheckpdf');
