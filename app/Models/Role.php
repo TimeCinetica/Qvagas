@@ -9,6 +9,7 @@ class Role extends Model
     const SuperAdmin = 1;
     const Admin = 2;
     const User = 3;
+    const collaborator = 4;
 
     /**
      * The attributes that are mass assignable.

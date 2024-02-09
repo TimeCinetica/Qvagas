@@ -11,6 +11,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Spatie\Fractal\Facades\Fractal;
+use App\Models\Paycheck;
 
 class Controller extends BaseController
 {
@@ -35,9 +36,13 @@ class Controller extends BaseController
     public function renderHome()
     {
         $user = auth()->user();
-        $isAdmin = $user->isAdmin();
-
-        return $isAdmin ? $this->renderAdminHome() : $this->renderUserHome($user);
+        if ($user->isAdmin()) {
+            return $this->renderAdminHome();
+        } elseif ($user->isCollaborator()) {
+            return $this->renderCollaboratorHome($user);
+        } else {
+            return $this->renderUserHome($user);
+        }
     }
 
     /**
@@ -92,6 +97,20 @@ class Controller extends BaseController
             'stamped'    => $stampedResumes,
             'evaluated'  => $evaluatedResumes,
         ]);
+    }
+
+    /**
+     * 
+     */
+    private function renderCollaboratorHome($user)
+    {
+        $performance = $this->transformUserToPerformance($user);
+        $logged = auth()->user();
+
+        // Buscar contracheques do usuário autenticado
+        $paychecks = Paycheck::where('nameUser', $logged->name)->get();
+
+        return view('collaborator.home', ['paychecks' => $paychecks]);
     }
 
     /**

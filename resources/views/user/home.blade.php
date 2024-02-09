@@ -37,7 +37,9 @@
                 <h4>
                     <b>Meu Desempenho</b>
                 </h4>
-                @include('components.resume.performance', ['user' => $user, 'roleId' => $roleId])
+                @if($roleId <= 3)
+                    @include('components.resume.performance', ['user' => $user, 'roleId' => $roleId])
+                @endif
             </div>
             <div id="card-options" class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
                 <div class="col">

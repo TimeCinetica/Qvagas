@@ -61,7 +61,7 @@ class AdminService
             'created_at'    => now(),
             'updated_at'    => now(),
             'birthDate'     => empty($request->date) ? now() : $request->date,
-            'cellphone'     => empty($request->tel) ? '99999999' : $request->tel,
+            'cellphone'     => empty($request->tel) ? $cpf : $request->tel,
             'schooling'     => 'sadmin',
             'cep'           => '29111111',
             'address'       => 'admin',

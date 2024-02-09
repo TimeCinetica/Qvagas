@@ -16,6 +16,7 @@ function _upsertPaycheck(title, actionFn, params = null, isEdit = false) {
             <input id="id" type="hidden" value="${id}" />
             <input id="name" type="text" value="${name}" readonly />
             <input id="file" type="file" name="paycheckpdf"/>
+            <input id="date" type="text" name="month_year" maxlength="7" oninput="formatDateInput(this)"/>
         `,
         icon: "question",
         showCancelButton: true,
@@ -25,11 +26,27 @@ function _upsertPaycheck(title, actionFn, params = null, isEdit = false) {
         allowOutsideClick: false,
         confirmButtonColor: "var(--primary)",
         preConfirm: () => {
+
+            const date = document.getElementById('date').value;
+            const numbers = date.replace(/\D/g, ''); // Remove non-digits
+            const file = document.getElementById('file').files[0]; // Get the file
+
+            if (!file) {
+                Swal.showValidationMessage('Por favor, anexe um documento PDF.');
+                return false;
+            }
+
+            if (numbers.length != 6) {
+                Swal.showValidationMessage('Por favor, insira um mês e um ano no formato MM/AAAA.');
+                return false;
+            }
+
             if (!isEdit) {
                 actionFn(name);
             } else {
                 actionFn({ id: id, name: name })
             }
+
             return false
         },
         didOpen: () => {
@@ -39,13 +56,30 @@ function _upsertPaycheck(title, actionFn, params = null, isEdit = false) {
     });
 }
 
+let lastValue = "";
+
+function formatDateInput(input) {
+    var value = input.value;
+    value = value.replace(/[^0-9/]/g, ""); // Permitir números e barras
+    if (value.length == 2 && !value.includes("/") && lastValue.length != 3) {
+        value += "/"; // Adiciona uma barra após o segundo número
+    }
+    lastValue = value; // Atualiza o último valor
+    input.value = value;
+}
+
 
 function _addPaycheck(name) {
     const fileInput = document.getElementById('file');
     const file = fileInput.files[0];
+    const dateInput = document.getElementById('date');
+    const date = dateInput.value;
+
     const formData = new FormData();
+
     formData.append('nameUser', name);
     formData.append('paycheckpdf', file);
+    formData.append('month_year', date);
 
     const endpoint = url("contracheque/store");
 

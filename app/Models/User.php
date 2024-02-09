@@ -125,6 +125,14 @@ class User extends Authenticatable implements JWTSubject
         return $this->roleId == Role::User;
     }
 
+    /**
+     * 
+     */
+    public function isCollaborator()
+    {
+        return $this->roleId == Role::collaborator;
+    }
+
 
     /**
      * Hash the password.

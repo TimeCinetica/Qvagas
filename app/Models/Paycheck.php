@@ -11,6 +11,6 @@ class Paycheck extends Model
    use HasFactory;
 
    protected $table = 'paycheck';
-   protected $fillable = ['nameUser', 'paycheckpdf'];
+   protected $fillable = ['nameUser', 'paycheckpdf', 'month_year'];
 
 }

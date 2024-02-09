@@ -12,18 +12,7 @@ class PerformanceTransformer extends TransformerAbstract
      *
      * @var array
      */
-    protected $defaultIncludes = [
-        'resumeStatus'
-    ];
-
-    /**
-     * List of resources possible to include
-     *
-     * @var array
-     */
-    protected $availableIncludes = [
-        //
-    ];
+    
 
     /**
      * A Fractal transformer.
@@ -36,10 +25,11 @@ class PerformanceTransformer extends TransformerAbstract
             'id'            => (int) $user->id,
             'stamped'       => (bool) $user->stamped,
             'evaluated'     => (bool) $user->evaluated,
-            'updatedAtDate' => $user->resume->updated_at->format('d/m/Y'),
-            'updatedAtTime' => $user->resume->updated_at->format('H:i')
+            'updatedAtDate' => $user->resume ? $user->resume->updated_at->format('d/m/Y') : null,
+            'updatedAtTime' => $user->resume ? $user->resume->updated_at->format('H:i') : null
         ];
     }
+
 
     /**
      * 
