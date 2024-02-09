@@ -19,7 +19,7 @@
                 <thead>
                     <tr>
                         <th class="text-center">Enviado por</th>
-                        <th class="text-center">Criado em</th>
+                        <th class="text-center">Atualizado em</th>
                         <th class="text-center">Contracheques</th>             
                     </tr>
                 </thead>
@@ -27,7 +27,7 @@
                     @foreach ($paycheckes as $paycheck)
                     <tr>
                         <td class="text-center">{{$user->admin_responsed}}</td>
-                        <td class="text-center">{{$paycheck->created_at}}</td>
+                        <td class="text-center">{{$paycheck->updated_at}}</td>
                         <td class=>
                             <center>
                                 <a class=" btn btn-primary btn-dft" href="{{ Storage::url($paycheck->paycheckpdf)}}">{{ \Carbon\Carbon::parse($paycheck->updated_at)->format('F/Y') }}</a>

@@ -58,7 +58,8 @@ class PaylispWebController extends Controller
     }
 
 
-    public function CrenderPaychecks(Request $request, $id){
+    public function CrenderPaychecks(Request $request){
+        $id = $this->PaycheckService->index($request)[0]->id;
         $user= User::find($id);
         $paycheckes= DB::table('paycheck')->where('nameUser', $user->name)->get();
 
