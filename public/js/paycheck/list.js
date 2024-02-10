@@ -12,10 +12,23 @@ function _upsertPaycheck(title, actionFn, params = null, isEdit = false) {
     Swal.fire({
         title: title,
         html: `
-            <input id="id" type="hidden" value="${id}" />
-            <input id="name" type="text" value="${name}" readonly />
-            <input id="file" type="file" name="paycheckpdf"/>
-            <input id="date" type="text" name="month_year" maxlength="7" oninput="formatDateInput(this)"/>
+            <form>
+                <div class="form-group">
+                    <input id="id" type="hidden" value="${id}" />
+                </div>
+                <div class="form-group">
+                    <label for="name">Nome: </label>
+                    <input class="form-control" id="name" type="text" value="${name}" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="date">Data do contracheque: </label>
+                    <input class="form-control" id="date" type="text" name="month_year" maxlength="7" oninput="formatDateInput(this)"/>
+                </div>
+                <div class="form-group">
+                    <label for="file">Contracheque: </label>
+                    <input class="form-control" id="file" type="file" name="paycheckpdf"/>
+                </div>
+            </form>
         `,
         icon: "question",
         showCancelButton: true,
