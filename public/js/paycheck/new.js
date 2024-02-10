@@ -32,7 +32,7 @@ function storeAdmin(event) {
 
         if (passwordIsValid && !getIsLoading()) {
             setIsLoading(true, "new-button");
-            const endpoint = url("admin/new");
+            const endpoint = url("contracheque/new");
             request(endpoint, "POST", data, _onStoreSuccess, _onStoreFail);
         }
     }

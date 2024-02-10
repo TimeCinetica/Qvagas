@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\PaycheckService;
 use Illuminate\Http\Request;
+use App\Http\Requests\Collaborator\StoreCollaboratorRequest;
 use App\Services\UserService;
 use App\Services\AuthService;
 use App\Models\User;
@@ -55,6 +56,11 @@ class PaylispWebController extends Controller
         return view('paycheck.newUser', [
             'paycheckArmazem' => $paycheckArmazem,
         ]);
+    }
+
+    public function newCollaborator(StoreCollaboratorRequest $request) {
+        $collaborator = $this->PaycheckService->newCollaborator($request);
+        return response()->json($collaborator, 201);
     }
 
 

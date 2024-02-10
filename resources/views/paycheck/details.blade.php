@@ -97,6 +97,9 @@
                                             <a class="btn btn-primary btn-dft" onclick="addPaycheck('{{ $user->name }}')">Novo<i class="bi bi-plus-square text-white"></i></a>
                                         </center>
                                     </td>
+                                    @if (empty($user->paychecks->id))
+                                        <td></td>
+                                    @endif
                                 </tr>
                                     
                                 
