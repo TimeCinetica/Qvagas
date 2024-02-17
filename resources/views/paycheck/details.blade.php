@@ -23,7 +23,7 @@
 'css' => ['css/occupations/index.css', 'css/shared/datatable.css']
 ])
 
-<body id="paycheck-cooperators-page">
+<body id="paycheck-cooperators-page" onload='initTable(@json($admins_list), @json($policies))'>
     @include('shared.nav')
     <div class="container">
     <div class="col">
@@ -35,7 +35,7 @@
                     </a>
                 </div>
             </div>
-            <form onsubmit="filter(event)" id="filter-form">
+            <form onsubmit="filterCollaborator(event)" id="filter-form">
                 <div class="d-flex align-items-center justify-content-center submit-filter">
                     <input type="text" placeholder="Nome do usuário admin" class="form-control" id="search" name="search">
                     <button class="btn btn-primary d-flex flex-row">
@@ -132,6 +132,9 @@
             arrowIcon.classList.toggle('bi-chevron-up');
         });
     });
+
+    
+
     </script>
     
 </body>

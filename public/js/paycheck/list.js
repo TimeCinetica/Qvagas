@@ -1,3 +1,58 @@
+// Função para adicionar eventos de clique
+// Função para adicionar eventos de clique
+function addClickEvents() {
+    $('.accordion-toggle').off('click').on('click', function() {
+        // Verifica se a linha está oculta
+        if (this.style.display !== "none") {
+            var arrowIcon = this.querySelector('i');
+            arrowIcon.classList.toggle('bi-chevron-down');
+            arrowIcon.classList.toggle('bi-chevron-up');
+        }
+    });
+}
+
+// Função de filtro
+// Função de filtro
+function filterCollaborator(event) {
+    event.preventDefault(); // Evita o comportamento padrão do formulário
+
+    var input = document.getElementById('search'); // Obtém o elemento de entrada
+    var filter = input.value.toUpperCase(); // Obtém o valor do filtro e converte para maiúsculas
+    var table = document.getElementById('list-colaborators-table'); // Obtém a tabela
+    var tr = table.getElementsByTagName('tr'); // Obtém todas as linhas da tabela
+
+    // Percorre todas as linhas da tabela
+    for (var i = 0; i < tr.length; i++) {
+        var td = tr[i].getElementsByTagName('td')[0]; // Obtém a primeira célula de cada linha (nome)
+        if (td) {
+            var txtValue = td.textContent || td.innerText; // Obtém o texto da célula
+            // Verifica se o texto da célula corresponde ao filtro
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = ""; // Mostra a linha se corresponder
+                // Obtém o ID do elemento que é mostrado/ocultado quando a linha é clicada
+                var targetId = tr[i].getAttribute('data-target');
+                // Expande o elemento
+                $(targetId).collapse('show');
+            } else {
+                // Verifica se a linha é uma linha interna da tabela
+                if (!tr[i].classList.contains('accordion-toggle')) {
+                    continue; // Ignora as linhas internas da tabela
+                }
+                tr[i].style.display = "none"; // Esconde a linha se não corresponder
+                // Obtém o ID do elemento que é mostrado/ocultado quando a linha é clicada
+                var targetId = tr[i].getAttribute('data-target');
+                // Colapsa o elemento
+                $(targetId).collapse('hide');
+            }
+        }
+    }
+
+    // Reanexa os eventos de clique após a filtragem
+    addClickEvents();
+}
+
+
+
 function addCooperator() {
     redirect("contracheque/new");
 }

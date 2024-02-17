@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Paycheck;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class PaycheckService
@@ -28,7 +29,17 @@ class PaycheckService
         // Retorne os resultados
         return $results;
     }
-    private function userQueryFilter($request)
+
+    public function indexAdminResponsed ($request = null)
+    {
+        $query = $this->collaboratorQuery($request);
+        $query->with('role');
+
+        $collaborator = $query->paginate(10);
+        return $collaborator;
+    }
+
+    private function userQueryFilter($request) 
     {
         $query = $this->paycheck->query();
 
@@ -86,5 +97,34 @@ class PaycheckService
         });
 
         return $collaborator;
+    }
+
+        /**
+     * @param Request $request
+     */
+
+    private function collaboratorQuery($request)
+    {
+        $query = $this->user->query();
+
+        $query->where(function ($q) {
+            $q->where('roleId', Role::collaborator)
+                ->orWhere('roleId', Role::Admin);
+        });
+
+        if ($request->has('name')) {
+            $query->orderBy('name', $request->name);
+        } else {
+            $query->orderBy('name', 'asc');
+        }
+
+        if (isset($request->search)) {
+            $name = trim($request->search);
+            $name = str_replace(" ", '%', $name);
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+
+        return $query;
     }
 }

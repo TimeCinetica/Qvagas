@@ -11,6 +11,7 @@
     <link href={{ asset($file) }} type="text/css" rel="stylesheet" />
     @endforeach
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ mix('js/webpack/app.min.js') }}"></script>
     <script src="{{ mix('js/webpack/components.js') }}"></script>
     <script src="{{ asset('js/global.js') }}"></script>

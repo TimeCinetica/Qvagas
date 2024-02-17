@@ -34,8 +34,10 @@ class PaylispWebController extends Controller
 
     public function renderPaycheck(Request $request){
 
+        $policies = $this->getPolicies();
         $paycheckArmazem = $this->PaycheckService->index($request);
         $admin_responsed = $paycheckArmazem[0]->name;
+        $admins_list = $this->PaycheckService->indexAdminResponsed($request);
         $users = User::where('admin_responsed', $admin_responsed)->get();
 
         foreach ($users as $user) {
@@ -43,8 +45,10 @@ class PaylispWebController extends Controller
         }
 
         return view('paycheck.details', [
+            'policies' => $policies,
             'paycheckArmazem' => $paycheckArmazem,
             'users' => $users,
+            'admins_list' => $admins_list,
         ]);
     }
 
@@ -52,9 +56,10 @@ class PaylispWebController extends Controller
     public function renderNewPaycheck(Request $request){
 
         $paycheckArmazem = $this->PaycheckService->index($request);
+        $admin_responsed = $paycheckArmazem[0]->name;
 
         return view('paycheck.newUser', [
-            'paycheckArmazem' => $paycheckArmazem,
+            'paycheckArmazem' => $admin_responsed,
         ]);
     }
 
@@ -135,5 +140,14 @@ class PaylispWebController extends Controller
         $paycheck->delete();
 
         return response()->json(['message' => 'Contracheque excluído com sucesso']);
+    }
+
+    private function getPolicies()
+    {
+        return (object) [
+            'details' => false,
+            'edit'    => false,
+            'delete'  => true,
+        ];
     }
 }
