@@ -1,5 +1,4 @@
 // Função para adicionar eventos de clique
-// Função para adicionar eventos de clique
 function addClickEvents() {
     $('.accordion-toggle').off('click').on('click', function() {
         // Verifica se a linha está oculta
@@ -11,7 +10,6 @@ function addClickEvents() {
     });
 }
 
-// Função de filtro
 // Função de filtro
 function filterCollaborator(event) {
     event.preventDefault(); // Evita o comportamento padrão do formulário

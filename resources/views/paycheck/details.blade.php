@@ -1,15 +1,21 @@
 <?php
-    setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
-    date_default_timezone_set('America/Sao_Paulo');
-    
-    function monthName($date) {
-        $date = DateTime::createFromFormat('m/Y', $date);
-        if ($date instanceof DateTime) {
-            return strftime('%B', $date->getTimestamp());
-        } else {
-            // Retorne algum valor padrão ou manipule o erro como achar melhor
-            return 'Data inválida';
-        }
+    function translateMonth($monthName) {
+        $months = [
+            'January' => 'Janeiro',
+            'February' => 'Fevereiro',
+            'March' => 'Março',
+            'April' => 'Abril',
+            'May' => 'Maio',
+            'June' => 'Junho',
+            'July' => 'Julho',
+            'August' => 'Agosto',
+            'September' => 'Setembro',
+            'October' => 'Outubro',
+            'November' => 'Novembro',
+            'December' => 'Dezembro'
+        ];
+        
+        return $months[$monthName] ?? $monthName;
     }
     
     
@@ -58,13 +64,10 @@
                 @foreach ($users as $user)
                 <tr data-toggle="collapse" data-target="#user-{{ $user->id }}" class="accordion-toggle" style="cursor: pointer;">
                     <td colspan="6" class="text-center">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div></div>
+                        <div class="d-flex align-items-center justify-content-between px-3">
+                            <div><a style="text-decoration: none; font-size: 20px; color: black;" href="{{ route('paycheck.collaborator', $user->id ) }}">+</a></div>
                             <div><strong>{{ $user->name }}</strong></div>
-                            
                             <div><i class="bi bi-chevron-down" id="arrow-{{ $user->id }}"></i></div>
-                            
-
                         </div>
                     </td>
                 </tr>
@@ -80,14 +83,13 @@
                                     @foreach ($user->paychecks as $paycheck)
                                         <td>                            
                                             <center>
-                                            <a class=" btn btn-primary btn-dft" href="{{ Storage::url($paycheck->paycheckpdf)}}" target="_blank">{{ monthName($paycheck->month_year) }}</a>
+                                            <a class=" btn btn-primary btn-dft" href="{{ Storage::url($paycheck->paycheckpdf)}}" target="_blank">{{ translateMonth($paycheck->month_name) }}</a>
 
                                             </center>
                                         </td>   
                                         <td class="text-center">
-                                                <i class="btn bi-pencil-square btn-sm" onclick="editPaycheck('{{$paycheck->id}}','{{ $user->name }}')"></i>
-
-                                                <i class="btn btn-danger bi-trash btn-smon" onclick="deletePaycheck('{{$paycheck->id}}')"></i>
+                                            <i class="btn bi-pencil-square btn-sm" onclick="editPaycheck('{{$paycheck->id}}','{{ $user->name }}')"></i>
+                                            <i class="btn btn-danger bi-trash btn-smon" onclick="deletePaycheck('{{$paycheck->id}}')"></i>
                                         </td>
                                     </tr>
                                         <td colspan="4"></td>

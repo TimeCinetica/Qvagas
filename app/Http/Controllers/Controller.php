@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Services\AuthService;
 use App\Services\ResumeService;
 use App\Services\UserService;
@@ -12,6 +13,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Spatie\Fractal\Facades\Fractal;
 use App\Models\Paycheck;
+use App\Models\User;
+use App\Services\PaycheckService;
+use Illuminate\Support\Facades\DB;
 
 class Controller extends BaseController
 {
@@ -19,15 +23,18 @@ class Controller extends BaseController
     protected $userService;
     protected $resumeService;
     protected $authService;
+    protected $PaycheckService;
 
     public function __construct(
         UserService $userService,
         ResumeService $resumeService,
-        AuthService $authService
+        AuthService $authService,
+        PaycheckService $PaycheckService
     ) {
         $this->userService = $userService;
         $this->resumeService = $resumeService;
         $this->authService = $authService;
+        $this->PaycheckService = $PaycheckService;;
     }
 
     /**
@@ -102,16 +109,27 @@ class Controller extends BaseController
     /**
      * 
      */
-    private function renderCollaboratorHome($user)
-    {
-        $performance = $this->transformUserToPerformance($user);
-        $logged = auth()->user();
 
-        // Buscar contracheques do usuário autenticado
-        $paychecks = Paycheck::where('nameUser', $logged->name)->get();
+     public function renderCollaboratorHome(User $user)
+     {
+         $paychecks= DB::table('paycheck')->where('nameUser', $user->name)->get();
+         
+         // Organize seus contracheques por ano
+         $paychecksByYear = $paychecks->groupBy('year');
+     
+         foreach ($paychecksByYear as $year => $paychecks) {
+             $paychecksByYear[$year] = $paychecks->sortBy(function ($paycheck) {
+                 return substr($paycheck->month_year, 0, 2); // Extrai o número do mês de month_year
+             });
+         }
+         
+         return view('collaborator.home', [
+             'user' => $user,
+             'paychecksByYear' => $paychecksByYear,
+         ]);
+     }
+     
 
-        return view('collaborator.home', ['paychecks' => $paychecks, 'name' => $logged->name]);
-    }
 
     /**
      * 
