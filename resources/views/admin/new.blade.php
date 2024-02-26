@@ -35,7 +35,7 @@
                             <label for="role">Perfil *</label>
                             <select id="role" name="role" class="form-select">
                                 <option value="1">Administrador</option>
-                                <option value="2" selected>Recursos Humanos</option>
+                                <option value="2" selected>Gestor de Recursos Humanos</option>
                             </select>
                         </div>
                         <div class="form-group">

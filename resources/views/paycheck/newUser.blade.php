@@ -18,7 +18,7 @@
                     <form method="POST" onsubmit="storeAdmin(event)" id="new-admin-form" novalidate>
                         <div class="form-group">
                             <label for="name">Admin </label>
-                            <input type="text" id="admin_responsed" name="admin_responsed" class="form-control" value="{{ $paycheckArmazem[0]->name }}" readonly required>
+                            <input type="text" id="admin_responsed" name="admin_responsed" class="form-control" value="{{ $paycheckArmazem }}" readonly required>
                             @include('components.form.validation', ['invalidMessage' => "Nome obrigatório"])
                         </div>
                         <div class="form-group">

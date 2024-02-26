@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\PaycheckService;
 use Illuminate\Http\Request;
+use App\Http\Requests\Collaborator\StoreCollaboratorRequest;
 use App\Services\UserService;
 use App\Services\AuthService;
 use App\Models\User;
@@ -33,8 +34,10 @@ class PaylispWebController extends Controller
 
     public function renderPaycheck(Request $request){
 
+        $policies = $this->getPolicies();
         $paycheckArmazem = $this->PaycheckService->index($request);
         $admin_responsed = $paycheckArmazem[0]->name;
+        $admins_list = $this->PaycheckService->indexAdminResponsed($request);
         $users = User::where('admin_responsed', $admin_responsed)->get();
 
         foreach ($users as $user) {
@@ -42,8 +45,10 @@ class PaylispWebController extends Controller
         }
 
         return view('paycheck.details', [
+            'policies' => $policies,
             'paycheckArmazem' => $paycheckArmazem,
             'users' => $users,
+            'admins_list' => $admins_list,
         ]);
     }
 
@@ -51,36 +56,74 @@ class PaylispWebController extends Controller
     public function renderNewPaycheck(Request $request){
 
         $paycheckArmazem = $this->PaycheckService->index($request);
+        $admin_responsed = $paycheckArmazem[0]->name;
 
         return view('paycheck.newUser', [
-            'paycheckArmazem' => $paycheckArmazem,
+            'paycheckArmazem' => $admin_responsed,
         ]);
     }
 
+    public function newCollaborator(StoreCollaboratorRequest $request) {
+        $collaborator = $this->PaycheckService->newCollaborator($request);
+        return response()->json($collaborator, 201);
+    }
 
-    public function CrenderPaychecks(Request $request){
-        $id = $this->PaycheckService->index($request)[0]->id;
+
+    public function renderPaycheckCollaborator(Request $request, $id){
+        //$id = $this->PaycheckService->index($request)[0]->id;
         $user= User::find($id);
-        $paycheckes= DB::table('paycheck')->where('nameUser', $user->name)->get();
+        $paycheck= DB::table('paycheck')->where('nameUser', $user->name)->get();
+        
+        // Organize seus contracheques por ano
+        $paychecksByYear = $paycheck->groupBy('year');
 
+        foreach ($paychecksByYear as $year => $paychecks) {
+            $paychecksByYear[$year] = $paychecks->sortBy(function ($paycheck) {
+                return substr($paycheck->month_year, 0, 2); // Extrai o número do mês de month_year
+            });
+        }
+        
         return view('paycheck.User', [
             'user' => $user,
-            'paycheckes' => $paycheckes,
+            'paycheck' => $paycheck,
+            'paychecksByYear' => $paychecksByYear,
         ]);
     }
+    
+    
 
     public function store(Request $request) {
 
         $nameUser = $request->get('nameUser');
         $date = $request->month_year;
-
+    
+        // Cria um objeto DateTime a partir da data fornecida
+        $dateObject = \DateTime::createFromFormat('m/Y', $date);
+    
+        if ($dateObject instanceof \DateTime) {
+            // Extrai o nome do mês e o ano da data
+            $monthName = strftime('%B', $dateObject->getTimestamp());
+            $year = $dateObject->format('Y');
+        } else {
+            // Manipula o erro como achar melhor
+            $monthName = 'Data inválida';
+            $year = 'Data inválida';
+        }
+    
         if($request->hasFile('paycheckpdf')){
             $file = $request->file('paycheckpdf');
             $path = Storage::putFile('public/paychecks', $file);
-            Paycheck::create(['nameUser' => $nameUser, 'paycheckpdf' => $path, 'month_year' => $date]);
-
+            Paycheck::create([
+                'nameUser' => $nameUser, 
+                'paycheckpdf' => $path, 
+                'month_year' => $date,
+                'month_name' => $monthName,  // Adiciona o nome do mês
+                'year' => $year  // Adiciona o ano
+            ]);
         }
     }
+    
+    
 
     public function serve ($filename) {
         $path = storage_path('app/public/' . $filename);
@@ -129,5 +172,14 @@ class PaylispWebController extends Controller
         $paycheck->delete();
 
         return response()->json(['message' => 'Contracheque excluído com sucesso']);
+    }
+
+    private function getPolicies()
+    {
+        return (object) [
+            'details' => false,
+            'edit'    => false,
+            'delete'  => true,
+        ];
     }
 }

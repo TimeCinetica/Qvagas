@@ -1,15 +1,21 @@
 <?php
-    setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
-    date_default_timezone_set('America/Sao_Paulo');
-    
-    function monthName($date) {
-        $date = DateTime::createFromFormat('m/Y', $date);
-        if ($date instanceof DateTime) {
-            return strftime('%B', $date->getTimestamp());
-        } else {
-            // Retorne algum valor padrão ou manipule o erro como achar melhor
-            return 'Data inválida';
-        }
+    function translateMonth($monthName) {
+        $months = [
+            'January' => 'Janeiro',
+            'February' => 'Fevereiro',
+            'March' => 'Março',
+            'April' => 'Abril',
+            'May' => 'Maio',
+            'June' => 'Junho',
+            'July' => 'Julho',
+            'August' => 'Agosto',
+            'September' => 'Setembro',
+            'October' => 'Outubro',
+            'November' => 'Novembro',
+            'December' => 'Dezembro'
+        ];
+        
+        return $months[$monthName] ?? $monthName;
     }
     
     
@@ -23,19 +29,19 @@
 'css' => ['css/occupations/index.css', 'css/shared/datatable.css']
 ])
 
-<body id="paycheck-cooperators-page">
+<body id="paycheck-cooperators-page" onload='initTable(@json($admins_list), @json($policies))'>
     @include('shared.nav')
     <div class="container">
     <div class="col">
-            <div class="row">
-                <div class="header">
+            <div class="row mt-5">
+                <div class="header d-flex gap-5">
                     <h2>Lista de colaboradores</h2>
                     <a type="button" class="btn btn-primary btn-dft" onclick="addCooperator()">
                     Adicionar <i class="bi bi-plus-square"></i>
                     </a>
                 </div>
             </div>
-            <form onsubmit="filter(event)" id="filter-form">
+            <form onsubmit="filterCollaborator(event)" id="filter-form">
                 <div class="d-flex align-items-center justify-content-center submit-filter">
                     <input type="text" placeholder="Nome do usuário admin" class="form-control" id="search" name="search">
                     <button class="btn btn-primary d-flex flex-row">
@@ -43,7 +49,7 @@
                     </button>
                 </div>
             </form>
-            <table id="list-colaborators-table" class="table table-striped fast-table">
+            <table id="list-colaborators-table" class="table table-striped fast-table" style="table-layout: fixed;">
                 <thead>
                     <tr>
                         <th class="text-center">Profissão</th>
@@ -58,14 +64,17 @@
                 @foreach ($users as $user)
                 <tr data-toggle="collapse" data-target="#user-{{ $user->id }}" class="accordion-toggle" style="cursor: pointer;">
                     <td colspan="6" class="text-center">
-                        <strong>{{ $user->name }}</strong>
-                        <i class="bi bi-chevron-down" id="arrow-{{ $user->id }}"></i>
+                        <div class="d-flex align-items-center justify-content-between px-3">
+                            <div><a style="text-decoration: none; font-size: 20px; color: black;" href="{{ route('paycheck.collaborator', $user->id ) }}">+</a></div>
+                            <div><strong>{{ $user->name }}</strong></div>
+                            <div><i class="bi bi-chevron-down" id="arrow-{{ $user->id }}"></i></div>
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="6" style="padding: 0 !important;">
                         <div class="collapse" id="user-{{ $user->id }}" >
-                            <table class="table">
+                            <table class="table" style="table-layout: fixed;">
                                 <tr>
                                     <td class="text-center">{{$user->job}}</td>
                                     <td class="text-center">{{$user->email}}</td>
@@ -74,23 +83,25 @@
                                     @foreach ($user->paychecks as $paycheck)
                                         <td>                            
                                             <center>
-                                            <a class=" btn btn-primary btn-dft" href="{{ Storage::url($paycheck->paycheckpdf)}}">{{ monthName($paycheck->month_year) }}</a>
+                                            <a class=" btn btn-primary btn-dft" href="{{ Storage::url($paycheck->paycheckpdf)}}" target="_blank">{{ translateMonth($paycheck->month_name) }}</a>
 
                                             </center>
                                         </td>   
-                                        <td class="text-end">
-                                                <i class="btn bi-pencil-square btn-sm" onclick="editPaycheck('{{$paycheck->id}}','{{ $user->name }}')"></i>
-
-                                                <i class="btn btn-danger bi-trash btn-smon" onclick="deletePaycheck('{{$paycheck->id}}')"></i>
+                                        <td class="text-center">
+                                            <i class="btn bi-pencil-square btn-sm" onclick="editPaycheck('{{$paycheck->id}}','{{ $user->name }}')"></i>
+                                            <i class="btn btn-danger bi-trash btn-smon" onclick="deletePaycheck('{{$paycheck->id}}')"></i>
                                         </td>
                                     </tr>
                                         <td colspan="4"></td>
                                     @endforeach
                                     <td>
                                         <center>
-                                            <a class="btn btn-primary bi-plus-square btn-dft" onclick="addPaycheck('{{ $user->name }}')"></a>
+                                            <a class="btn btn-primary btn-dft" onclick="addPaycheck('{{ $user->name }}')">Novo<i class="bi bi-plus-square text-white"></i></a>
                                         </center>
                                     </td>
+                                    @if (empty($user->paychecks->id))
+                                        <td></td>
+                                    @endif
                                 </tr>
                                     
                                 
@@ -123,6 +134,9 @@
             arrowIcon.classList.toggle('bi-chevron-up');
         });
     });
+
+    
+
     </script>
     
 </body>
