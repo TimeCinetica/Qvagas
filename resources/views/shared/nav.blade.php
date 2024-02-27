@@ -16,12 +16,12 @@
                     <a class="nav-link" aria-current="page" href="/contracheque">Contracheques</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/resumes">Busca por candidato</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/occupations">Gestão de profissões</a>
                 </li>
                 @if(auth()->user()->isSadmin())
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/resumes">Busca por candidato</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/admins">Gestão de usuários</a>
                 </li>

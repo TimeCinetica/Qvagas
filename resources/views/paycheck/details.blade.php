@@ -80,49 +80,22 @@
                                     <td class="text-center">{{$user->email}}</td>
                                     <td class="text-center">{{$user->updated_at}}</td>
                                     <td class="text-center">@if($user->status)Ativo @else Inativo @endif</td>
-                                    @foreach ($user->paychecks as $paycheck)
-                                        <td>                            
-                                            <center>
-                                            <a class=" btn btn-primary btn-dft" href="{{ Storage::url($paycheck->paycheckpdf)}}" target="_blank">{{ translateMonth($paycheck->month_name) }}</a>
-
-                                            </center>
-                                        </td>   
-                                        <td class="text-center">
-                                            <i class="btn bi-pencil-square btn-sm" onclick="editPaycheck('{{$paycheck->id}}','{{ $user->name }}')"></i>
-                                            <i class="btn btn-danger bi-trash btn-smon" onclick="deletePaycheck('{{$paycheck->id}}')"></i>
-                                        </td>
-                                    </tr>
-                                        <td colspan="4"></td>
-                                    @endforeach
                                     <td>
-                                        <center>
-                                            <a class="btn btn-primary btn-dft" onclick="addPaycheck('{{ $user->name }}')">Novo<i class="bi bi-plus-square text-white"></i></a>
-                                        </center>
+                                        <center><a class="btn btn-primary btn-dft" onclick="addPaycheck('{{ $user->name }}')">Novo<i class="bi bi-plus-square text-white"></i></a></center>
                                     </td>
-                                    @if (empty($user->paychecks->id))
-                                        <td></td>
-                                    @endif
+                                    <td class="text-center">
+                                        <i class="btn btn-danger bi-trash btn-smon" onclick="deleteCollaborator('{{$user->id}}')"></i>
+                                    </td>
                                 </tr>
-                                    
-                                
                             </table>
                         </div>
                     </td>
                 </tr>
                 @endforeach
-
-
-
-
                 </tbody>
             </table>
-            
         </div>
-
     <br>
-    
-
-
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
@@ -134,8 +107,6 @@
             arrowIcon.classList.toggle('bi-chevron-up');
         });
     });
-
-    
 
     </script>
     

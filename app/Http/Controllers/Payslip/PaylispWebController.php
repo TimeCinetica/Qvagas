@@ -167,11 +167,11 @@ class PaylispWebController extends Controller
     {
         $id = $request->input('id');
 
-        $paycheck = Paycheck::find($id);
+        $user = User::find($id);
 
-        $paycheck->delete();
+        $user->delete();
 
-        return response()->json(['message' => 'Contracheque excluído com sucesso']);
+        return response()->json(['message' => 'Colaborador excluído com sucesso']);
     }
 
     private function getPolicies()
