@@ -15,7 +15,7 @@ Route::middleware(['throttle:300,1'])->group(function () {
         Route::put('admin/set-password', [AdminWebController::class, 'setPassword']);
     });
 
-    Route::middleware(['isWebAdmin'])->group(function () {
+    Route::middleware(['checkAdmin'])->group(function () {
         Route::get('occupations', [OccupationsWebController::class, 'renderOccupations']);
         Route::post('occupations', [OccupationsWebController::class, 'store']);
         Route::put('occupations/{id}', [OccupationsWebController::class, 'edit']);

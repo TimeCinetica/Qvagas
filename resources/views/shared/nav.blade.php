@@ -6,7 +6,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="/"><img src="{{asset('images/logo.png')}}" alt="logo"></a>
-        @if(auth()->check() && auth()->user()->isAdmin())
+        @if(auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isSadmin()))
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

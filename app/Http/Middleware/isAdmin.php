@@ -24,7 +24,7 @@ class isAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        $authorized = $this->auth->isAdmin();
+        $authorized ? $this->auth->isAdmin() : $this->auth->isSadmin();
 
         if (!$authorized) {
             return response()->json(['error' => 'This user does not have access to this functionality.'], 403);

@@ -57,13 +57,13 @@ class AuthService
     public function hasResumeAccess($userId)
     {
         $user = $this->authenticatedUser();
-        return isset($user) && ($user->isAdmin() || $user->id == $userId);
+        return isset($user) && ($user->isSadmin() || $user->id == $userId);
     }
 
     public function hasPaycheckAccess($userId)
     {
         $user = $this->authenticatedUser();
-        return isset($user) && ($user->isAdmin() || $user->id == $userId);
+        return isset($user) && ($user->isAdmin() || $user->isSadmin() || $user->id == $userId);
     }
 
 

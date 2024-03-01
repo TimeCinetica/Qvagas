@@ -43,7 +43,7 @@ class Controller extends BaseController
     public function renderHome()
     {
         $user = auth()->user();
-        if ($user->isAdmin()) {
+        if ($user->isAdmin() || $user->isSadmin()) {
             return $this->renderAdminHome();
         } elseif ($user->isCollaborator()) {
             return $this->renderCollaboratorHome($user);
