@@ -35,7 +35,7 @@
             <div class="row justify-content-center welcome">
                 <div class="card card-shadow">
                     <div class="card-body">
-                        <h2 class="card-title">Olá, {{ $user->name }}!</h2>
+                        <h2 class="card-title"><strong>Olá, {{ $user->name }}!</strong></h2>
                         <div class="card-text">
                             <p>
                                 Bem-vindo à plataforma QContraCheque, facilitando a visualização do seu contracheque. 

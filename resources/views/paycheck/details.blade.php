@@ -35,7 +35,7 @@
     <div class="col">
             <div class="row mt-5">
                 <div class="header d-flex gap-5">
-                    <h2>Lista de colaboradores</h2>
+                    <h2><strong>Lista de colaboradores</strong></h2>
                     <a type="button" class="btn btn-primary btn-dft" onclick="addCooperator()">
                     Adicionar <i class="bi bi-plus-square"></i>
                     </a>
