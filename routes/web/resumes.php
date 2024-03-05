@@ -10,7 +10,7 @@ Route::middleware(['throttle:300,1'])->group(function () {
         Route::get('{userId}/resume/pdf', [ResumeWebController::class, 'downloadPdf']);
     });
 
-    Route::middleware(['isWebAdmin'])->group(function () {
+    Route::middleware(['checkAdmin'])->group(function () {
         Route::get('occupations', [ResumeWebController::class, 'renderOccupations']);
         Route::get('resumes/status', [ResumeWebController::class, 'resumeByStatus']);
         Route::get('resumes/export-csv', [ResumeWebController::class, 'exportCsv']);

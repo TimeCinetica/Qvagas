@@ -114,7 +114,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function isAdmin()
     {
-        return $this->roleId == Role::Admin || $this->roleId == Role::SuperAdmin;
+        return $this->roleId == Role::Admin;
     }
 
     /**

@@ -201,7 +201,7 @@ function _onSuccessUpdatePaycheck(response) {
 }
 
 
-function deletePaycheck(id) {
+function deleteCollaborator(id) {
     const token = document.head.querySelector('meta[name="csrf-token"]').content;
 
     Swal.fire({

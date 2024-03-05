@@ -34,7 +34,7 @@
     <div class="col">
             <div class="row mt-5">
                 <div class="header">
-                    <h2>Contracheques - {{$user->name}}</h2>
+                    <h2><strong>Contracheques - {{$user->name}}</strong></h2>
                 </div>
             </div>
             <table id="list-paychecks-table" class="table table-striped fast-table">

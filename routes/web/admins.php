@@ -15,19 +15,19 @@ Route::middleware(['throttle:300,1'])->group(function () {
         Route::put('admin/set-password', [AdminWebController::class, 'setPassword']);
     });
 
-    Route::middleware(['isWebAdmin'])->group(function () {
+    Route::middleware(['checkAdmin'])->group(function () {
         Route::get('occupations', [OccupationsWebController::class, 'renderOccupations']);
         Route::post('occupations', [OccupationsWebController::class, 'store']);
         Route::put('occupations/{id}', [OccupationsWebController::class, 'edit']);
         Route::delete('occupations/{id}', [OccupationsWebController::class, 'delete']);
 
-        Route::get('resumes', [ResumeWebController::class, 'renderResumes']);
-        Route::delete('resumes/{id}', [ResumeWebController::class, 'delete']);
-
         Route::get('infos', [AdminWebController::class, 'renderInfos']);
     });
 
     Route::middleware(['isWebSadmin:,/'])->group(function () {
+        Route::get('resumes', [ResumeWebController::class, 'renderResumes']);
+        Route::delete('resumes/{id}', [ResumeWebController::class, 'delete']);
+
         Route::get('admins', [AdminWebController::class, 'renderList']);
         Route::get('admin/new', [AdminWebController::class, 'renderNewAdmin']);
         Route::delete('admins/{id}', [AdminWebController::class, 'delete']);

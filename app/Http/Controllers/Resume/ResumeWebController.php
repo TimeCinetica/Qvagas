@@ -38,7 +38,7 @@ class ResumeWebController extends Controller
     {
         $loggedUser = auth()->user();
 
-        if ($loggedUser->isCollaborator()) {
+        if ($loggedUser->isCollaborator() || $loggedUser->isRh()) {
             // Redirecione para a tela de contracheques ou outra página apropriada
             return redirect('paychecks.index');
         }
