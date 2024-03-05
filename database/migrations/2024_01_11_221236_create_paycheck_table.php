@@ -13,6 +13,7 @@ class CreatePaycheckTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('paycheck');
         Schema::create('paycheck', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
