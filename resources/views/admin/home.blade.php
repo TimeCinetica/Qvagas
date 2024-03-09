@@ -121,6 +121,16 @@
                     </div>
                 </div>
             </div>
+            <div class="col">
+                <div class="card card-shadow" onclick="redirect('contracheque')">
+                    <div class=" card-body">
+                        <div class="option">
+                            <i class="bi bi-clipboard"></i>
+                            <label>QContracheque</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @if(auth()->user()->isSadmin())
             <div class="col">
                 <div class="card card-shadow" onclick="redirect('admins')">

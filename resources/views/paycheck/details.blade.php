@@ -77,7 +77,7 @@
                             <table class="table" style="table-layout: fixed;">
                                 <tr>
                                     <td class="text-center">{{$user->job}}</td>
-                                    <td class="text-center">{{$user->email}}</td>
+                                    <td class="text-center" style="word-wrap: break-word;">{{$user->email}}</td>
                                     <td class="text-center">{{$user->updated_at}}</td>
                                     <td class="text-center">@if($user->status)Ativo @else Inativo @endif</td>
                                     <td>

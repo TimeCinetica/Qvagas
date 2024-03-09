@@ -144,25 +144,51 @@ class PaylispWebController extends Controller
         $id = $request->get('id');
         $nameUser = $request->get('nameUser');
         $month_year = $request->get('month_year');
-
+    
         if ($request->hasFile('paycheckpdf')) {
             $file = $request->file('paycheckpdf');
             $path = Storage::putFile('public/paychecks', $file);
-
+    
             $paycheck = Paycheck::find($id);
-
+    
             if (!$paycheck) {
                 return response()->json(['error' => 'Contracheque não encontrado'], 404);
             }
-
-            $paycheck->update(['nameUser' => $nameUser, 'paycheckpdf' => $path, 'month_year' => $month_year]);
-
+    
+            // Extrai o mês e o ano de month_year
+            list($month_number, $year) = explode('/', $month_year);
+    
+            // Mapeia o número do mês para o nome do mês
+            $months = [
+                '01' => 'January',
+                '02' => 'February',
+                '03' => 'March',
+                '04' => 'April',
+                '05' => 'May',
+                '06' => 'June',
+                '07' => 'July',
+                '08' => 'August',
+                '09' => 'September',
+                '10' => 'October',
+                '11' => 'November',
+                '12' => 'December',
+            ];
+            $month_name = $months[$month_number];
+    
+            $paycheck->update([
+                'nameUser' => $nameUser, 
+                'paycheckpdf' => $path, 
+                'month_year' => $month_year,
+                'month_name' => $month_name,
+                'year' => $year
+            ]);
+    
             return response()->json(['message' => 'Contracheque atualizado com sucesso']);
         } else {
             return response()->json(['error' => 'Nenhum arquivo PDF fornecido'], 400);
         }
     }
-
+    
     public function delete(Request $request)
     {
         $id = $request->input('id');
@@ -172,6 +198,14 @@ class PaylispWebController extends Controller
         $user->delete();
 
         return response()->json(['message' => 'Colaborador excluído com sucesso']);
+    }
+
+    public function deletePaycheck (Request $request) {
+        $id = $request->input('id');
+        $paycheck = Paycheck::find($id);
+        $paycheck->delete();
+
+        return response()->json(['message' => 'Contracheque excluído com sucesso']);
     }
 
     private function getPolicies()

@@ -31,7 +31,7 @@
 <body id="paycheck-collaborator-page">
     @include('shared.nav')
     <div class="container">
-    <div class="col">
+        <div class="col">
             <div class="row mt-5">
                 <div class="header">
                     <h2><strong>Contracheques - {{$user->name}}</strong></h2>
@@ -61,7 +61,17 @@
                                         @foreach ($paychecks as $index => $paycheck)
                                             <div class="col-md-3">
                                                 <center>
-                                                    <a class="btn btn-primary btn-dft w-100 my-1" href="{{ Storage::url($paycheck->paycheckpdf) }}" target="_blank">{{ translateMonth($paycheck->month_name) }}</a>
+                                                    <div class="d-flex align-items-center justify-content-around btn btn-primary btn-dft w-100 my-1">
+                                                        <a 
+                                                            href="{{ Storage::url($paycheck->paycheckpdf) }}" 
+                                                            class="text-white text-decoration-none w-75" 
+                                                            target="_blank"
+                                                        >
+                                                            {{ translateMonth($paycheck->month_name) }}
+                                                        </a>
+                                                        <i onclick="editPaycheck('{{$paycheck->id}}', '{{$paycheck->nameUser}}', '{{$paycheck->month_year}}')" class="bi bi-pencil-square text-white"></i>
+                                                        <i onclick="deletePaycheck('{{$paycheck->id}}')" class="bi bi-trash text-white"></i>
+                                                    </div>
                                                 </center>
                                             </div>
                                             

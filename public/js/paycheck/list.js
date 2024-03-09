@@ -38,7 +38,7 @@ function filterCollaborator(event) {
                 }
                 tr[i].style.display = "none"; // Esconde a linha se não corresponder
                 // Obtém o ID do elemento que é mostrado/ocultado quando a linha é clicada
-                var targetId = tr[i].getAttribute('data-target');
+                targetId = tr[i].getAttribute('data-target');
                 // Colapsa o elemento
                 $(targetId).collapse('hide');
             }
@@ -62,6 +62,8 @@ function addPaycheck(name) {
 function _upsertPaycheck(title, actionFn, params = null, isEdit = false) {
     const name = params && params.name ? params.name : "";
     const id = isEdit && params && params.id ? params.id : null;
+    const month_year = isEdit && params && params.month_year ? params.month_year : "";
+
     Swal.fire({
         title: title,
         html: `
@@ -75,7 +77,7 @@ function _upsertPaycheck(title, actionFn, params = null, isEdit = false) {
                 </div>
                 <div class="form-group">
                     <label for="date">Data do contracheque: </label>
-                    <input class="form-control" id="date" type="text" name="month_year" maxlength="7" oninput="formatDateInput(this)"/>
+                    <input class="form-control" value="${month_year || ''}" id="date" type="text" name="month_year" maxlength="7" oninput="formatDateInput(this)"/>
                 </div>
                 <div class="form-group">
                     <label for="file">Contracheque: </label>
@@ -133,7 +135,6 @@ function formatDateInput(input) {
     lastValue = value; // Atualiza o último valor
     input.value = value;
 }
-
 
 function _addPaycheck(name) {
     const fileInput = document.getElementById('file');
@@ -217,6 +218,47 @@ function deleteCollaborator(id) {
             $.ajax({
                 type: 'POST',
                 url: 'contracheque/delete',
+                data: { id: id },
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Excluído!',
+                        text: response.message,
+                        icon: 'success',
+                    }).then(() => {
+                        location.reload();
+                    });
+                },
+                error: function (error) {
+                    Swal.fire({
+                        title: 'Erro!',
+                        text: error.responseJSON.error,
+                        icon: 'error',
+                    });
+                }
+            });
+        }
+    });
+}
+
+function deletePaycheck(id) {
+    const token = document.head.querySelector('meta[name="csrf-token"]').content;
+
+    Swal.fire({
+        title: 'Você tem certeza?',
+        text: 'Esta ação não pode ser desfeita!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sim, excluir!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'POST',
+                url: `${id}/delete`,
                 data: { id: id },
                 headers: {
                     'X-CSRF-TOKEN': token
