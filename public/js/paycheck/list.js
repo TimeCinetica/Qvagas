@@ -217,7 +217,7 @@ function deleteCollaborator(id) {
         if (result.isConfirmed) {
             $.ajax({
                 type: 'POST',
-                url: 'contracheque/delete',
+                url: '/contracheque/delete',
                 data: { id: id },
                 headers: {
                     'X-CSRF-TOKEN': token

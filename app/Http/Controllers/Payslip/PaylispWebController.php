@@ -195,7 +195,7 @@ class PaylispWebController extends Controller
 
         $user = User::find($id);
 
-        $user->delete();
+        $user->forceDelete();
 
         return response()->json(['message' => 'Colaborador excluído com sucesso']);
     }
