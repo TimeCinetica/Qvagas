@@ -158,7 +158,7 @@ function _addPaycheck(name) {
 
 function _onSuccessUpsertPaycheck() {
     Swal.close();
-    sweetAlert("success", "Sucesso!", "Profissão salva com sucesso!", (r) =>
+    sweetAlert("success", "Sucesso!", "Contracheque salvo com sucesso!", (r) =>
         location.reload()
     );
 }

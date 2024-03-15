@@ -72,6 +72,14 @@ class PaylispWebController extends Controller
     public function renderPaycheckCollaborator(Request $request, $id){
         //$id = $this->PaycheckService->index($request)[0]->id;
         $user= User::find($id);
+        $paycheckArmazem = $this->PaycheckService->index($request);
+        $admin_responsed = $paycheckArmazem[0]->name;
+        
+
+        if($user->admin_responsed != $admin_responsed) {
+            abort(403, 'acesso negado');
+        }
+
         $paycheck= DB::table('paycheck')->where('nameUser', $user->name)->get();
         
         // Organize seus contracheques por ano

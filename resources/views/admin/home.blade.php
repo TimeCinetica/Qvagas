@@ -12,6 +12,7 @@
         <div class="row">
             <h1 class="welcome">Seja bem vindo(a)!</h1>
         </div>
+        @if(auth()->user()->isSadmin())
         <div class="row subtitle">
             <h4>Resumo</h4>
         </div>
@@ -121,6 +122,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             <div class="col">
                 <div class="card card-shadow" onclick="redirect('contracheque')">
                     <div class=" card-body">
