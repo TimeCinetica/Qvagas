@@ -15,20 +15,20 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/contracheque">Contracheques</a>
                 </li>
+                @if(auth()->user()->isSadmin())
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/occupations">Gestão de profissões</a>
                 </li>
-                @if(auth()->user()->isSadmin())
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/resumes">Busca por candidato</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/admins">Gestão de usuários</a>
                 </li>
-                @endif
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/infos">Perfil dos candidatos</a>
                 </li>
+                @endif
                 <li class="nav-item logout-position">
                     <a class="nav-link" onclick="logout()">
                         <i class="bi bi-box-arrow-right"></i>

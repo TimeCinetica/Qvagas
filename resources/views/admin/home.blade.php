@@ -12,6 +12,7 @@
         <div class="row">
             <h1 class="welcome">Seja bem vindo(a)!</h1>
         </div>
+        @if(auth()->user()->isSadmin())
         <div class="row subtitle">
             <h4>Resumo</h4>
         </div>
@@ -117,6 +118,17 @@
                         <div class="option">
                             <i class="bi bi-question-circle"></i>
                             <label>Perfis dos Canditatos</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+            <div class="col">
+                <div class="card card-shadow" onclick="redirect('contracheque')">
+                    <div class=" card-body">
+                        <div class="option">
+                            <i class="bi bi-clipboard"></i>
+                            <label>QContracheque</label>
                         </div>
                     </div>
                 </div>
