@@ -67,9 +67,9 @@
                                                             class="text-white text-decoration-none w-75" 
                                                             target="_blank"
                                                         >
-                                                            {{ translateMonth($paycheck->month_name) }}
+                                                            {{$paycheck->name_paycheck}} - {{ translateMonth($paycheck->month_name) }}
                                                         </a>
-                                                        <i onclick="editPaycheck('{{$paycheck->id}}', '{{$paycheck->nameUser}}', '{{$paycheck->month_year}}')" class="bi bi-pencil-square text-white"></i>
+                                                        <i onclick="editPaycheck('{{$paycheck->id}}', '{{$paycheck->nameUser}}', '{{$paycheck->month_year}}', '{{$paycheck->name_paycheck}}')" class="bi bi-pencil-square text-white"></i>
                                                         <i onclick="deletePaycheck('{{$paycheck->id}}')" class="bi bi-trash text-white"></i>
                                                     </div>
                                                 </center>

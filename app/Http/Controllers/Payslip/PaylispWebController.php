@@ -104,6 +104,7 @@ class PaylispWebController extends Controller
 
         $nameUser = $request->get('nameUser');
         $date = $request->month_year;
+        $name_paycheck = $request->name_paycheck;
     
         // Cria um objeto DateTime a partir da data fornecida
         $dateObject = \DateTime::createFromFormat('m/Y', $date);
@@ -126,7 +127,8 @@ class PaylispWebController extends Controller
                 'paycheckpdf' => $path, 
                 'month_year' => $date,
                 'month_name' => $monthName,  // Adiciona o nome do mês
-                'year' => $year  // Adiciona o ano
+                'year' => $year,  // Adiciona o ano
+                'name_paycheck' => $name_paycheck
             ]);
         }
     }
@@ -152,6 +154,7 @@ class PaylispWebController extends Controller
         $id = $request->get('id');
         $nameUser = $request->get('nameUser');
         $month_year = $request->get('month_year');
+        $name_paycheck = $request->get('name_paycheck');
     
         if ($request->hasFile('paycheckpdf')) {
             $file = $request->file('paycheckpdf');
@@ -188,7 +191,8 @@ class PaylispWebController extends Controller
                 'paycheckpdf' => $path, 
                 'month_year' => $month_year,
                 'month_name' => $month_name,
-                'year' => $year
+                'year' => $year,
+                'name_paycheck' => $name_paycheck,
             ]);
     
             return response()->json(['message' => 'Contracheque atualizado com sucesso']);
@@ -200,8 +204,15 @@ class PaylispWebController extends Controller
     public function delete(Request $request)
     {
         $id = $request->input('id');
-
         $user = User::find($id);
+
+        //obtenha todos os contracheques associados ao colaborador
+        $paychecks = Paycheck::where('nameUser', $user->name)->get();
+
+        foreach ($paychecks as $paycheck) {
+            Storage::delete($paycheck->paycheckpdf);
+            $paycheck->delete();
+        }
 
         $user->forceDelete();
 
@@ -211,6 +222,9 @@ class PaylispWebController extends Controller
     public function deletePaycheck (Request $request) {
         $id = $request->input('id');
         $paycheck = Paycheck::find($id);
+
+        Storage::delete($paycheck->paycheckpdf);
+
         $paycheck->delete();
 
         return response()->json(['message' => 'Contracheque excluído com sucesso']);

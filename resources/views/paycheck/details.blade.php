@@ -79,7 +79,7 @@
                                     <td class="text-center">{{$user->job}}</td>
                                     <td class="text-center" style="word-wrap: break-word;">{{$user->email}}</td>
                                     <td class="text-center">{{$user->updated_at}}</td>
-                                    <td class="text-center">@if($user->status)Ativo @else Inativo @endif</td>
+                                    <td class="text-center">@if($user->status == 0)Ativo @else Inativo @endif</td>
                                     <td>
                                         <center><a class="btn btn-primary btn-dft" onclick="addPaycheck('{{ $user->name }}')">Novo<i class="bi bi-plus-square text-white"></i></a></center>
                                     </td>
